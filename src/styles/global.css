@@ -341,9 +341,17 @@ p {
 }
 
 .section-nav__label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.34rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brand-purple) 14%, var(--border));
+  background: color-mix(in srgb, var(--brand-purple) 7%, var(--surface));
   color: var(--text-muted);
-  font-size: 0.96rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .section-nav__link {
@@ -1197,25 +1205,41 @@ p {
     width: min(1120px, calc(100% - 1.25rem));
   }
 
-  .site-header__actions,
-  .actions {
-    align-items: stretch;
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
   }
 
-  .header-link,
+  .site-header__actions,
+  .actions {
+    align-items: center;
+  }
+
+  .site-header__actions {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+
   .button,
   .button--secondary,
-  .button--ghost,
-  .theme-toggle {
+  .button--ghost {
     width: 100%;
   }
 
   .theme-toggle {
-    justify-content: space-between;
+    width: auto;
+    justify-content: flex-start;
   }
 
   .theme-toggle__button {
-    flex: 1;
+    width: 2.3rem;
+    min-width: 2.3rem;
+    min-height: 2.3rem;
+    padding: 0;
+  }
+
+  .theme-toggle__button span {
+    display: none;
   }
 
   .hero__visual {

@@ -16,6 +16,7 @@ const options = [
         class="theme-toggle__button"
         data-theme-option={option.value}
         aria-pressed={option.value === 'system' ? 'true' : 'false'}
+        aria-label={option.label}
       >
         <Icon name={option.icon} size={16} />
         <span>{option.label}</span>
