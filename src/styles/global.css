@@ -24,10 +24,9 @@
   --text: #1f1e33;
   --text-muted: #54516a;
   --border: rgba(81, 43, 212, 0.14);
-  --border-strong: rgba(31, 30, 51, 0.18);
   --shadow: 0 24px 60px rgba(31, 30, 51, 0.1);
   --code-bg: rgba(81, 43, 212, 0.08);
-  --swatch-border: rgba(31, 30, 51, 0.18);
+  --swatch-border: rgba(31, 30, 51, 0.22);
   font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -45,7 +44,6 @@
   --text: #ffffff;
   --text-muted: #d8d5e8;
   --border: rgba(185, 170, 238, 0.18);
-  --border-strong: rgba(255, 255, 255, 0.24);
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
   --code-bg: rgba(185, 170, 238, 0.12);
   --swatch-border: rgba(255, 255, 255, 0.24);
@@ -154,7 +152,9 @@ p {
 .pill-link,
 .copy-button,
 .theme-toggle__button,
-.footer-link {
+.footer-link,
+.footer-nav-link,
+.back-to-top {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -166,11 +166,13 @@ p {
     box-shadow 160ms ease,
     background-color 160ms ease,
     border-color 160ms ease,
-    color 160ms ease;
+    color 160ms ease,
+    opacity 160ms ease;
 }
 
 .header-link,
-.footer-link {
+.footer-link,
+.footer-nav-link {
   min-height: 2.5rem;
   padding: 0.55rem 0.95rem;
   color: var(--text);
@@ -214,13 +216,18 @@ p {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.55rem;
   margin-bottom: 0.8rem;
   color: var(--brand-purple);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.eyebrow svg {
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
 .hero h1 {
@@ -258,8 +265,10 @@ p {
 .pill-link:hover,
 .header-link:hover,
 .footer-link:hover,
+.footer-nav-link:hover,
 .copy-button:hover,
-.theme-toggle__button:hover {
+.theme-toggle__button:hover,
+.back-to-top:hover {
   transform: translateY(-1px);
 }
 
@@ -279,11 +288,10 @@ p {
 
 .hero__visual {
   position: relative;
-  min-height: 24rem;
+  min-height: 22rem;
 }
 
 .hero-frame,
-.hero-panel,
 .note-card,
 .repo-card,
 .asset-card,
@@ -300,64 +308,18 @@ p {
 
 .hero-frame {
   position: absolute;
-  overflow: hidden;
-}
-
-.hero-frame--primary {
-  inset: 0 2.75rem 0 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2.5rem;
+  overflow: hidden;
   background: var(--hero-surface);
+  will-change: transform;
 }
 
 .hero-frame__image--primary {
-  max-width: 14rem;
-}
-
-.hero-panel {
-  position: absolute;
-  right: 0;
-  bottom: 1.25rem;
-  display: grid;
-  gap: 0.8rem;
-  min-width: 14rem;
-  padding: 1rem 1.1rem;
-}
-
-.hero-panel__label {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.hero-panel__chips,
-.hero-panel__swatches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.hero-panel__chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2rem;
-  padding: 0.3rem 0.65rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--brand-purple) 8%, var(--surface));
-  color: var(--text);
-  font-size: 0.88rem;
-  font-weight: 600;
-}
-
-.hero-panel__swatch {
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 999px;
-  border: 1px solid var(--swatch-border);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
+  max-width: 15rem;
 }
 
 .section {
@@ -400,9 +362,9 @@ p {
 .color-card p,
 .download-card p,
 .license-card p,
-.meta-text,
 .code-card p,
-.site-footer__summary {
+.site-footer__summary,
+.site-footer__legal {
   color: var(--text-muted);
 }
 
@@ -589,18 +551,30 @@ p {
 }
 
 .site-footer {
-  display: grid;
-  gap: 1.25rem;
   margin-top: 3rem;
-  padding-top: 1.5rem;
+  padding: 2rem 0 1rem;
   border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.95rem;
 }
 
-.site-footer__intro {
+.site-footer__grid {
   display: grid;
-  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 0.8fr));
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.site-footer__column {
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+}
+
+.site-footer__column h3 {
+  font-size: 1rem;
 }
 
 .site-footer__title {
@@ -608,57 +582,45 @@ p {
   color: var(--text);
 }
 
-.site-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.site-footer__list {
+  display: grid;
+  gap: 0.65rem;
 }
 
 .site-footer__meta {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 1rem;
   align-items: center;
+  padding: 1rem 0 0;
 }
 
-.footer-link--top {
-  min-width: 7.25rem;
+.site-footer__legal {
+  max-width: 44rem;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 10;
+  min-height: 2.9rem;
+  padding: 0.7rem 1rem;
+  color: var(--brand-white);
+  background: var(--brand-purple);
+  box-shadow: 0 18px 28px rgba(81, 43, 212, 0.28);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
-  }
-
-  .hero-frame--primary {
-    animation: hero-float 10s ease-in-out infinite;
-  }
-
-  .hero-panel {
-    animation: hero-float-secondary 12s ease-in-out infinite;
-  }
-}
-
-@keyframes hero-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes hero-float-secondary {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(6px);
   }
 }
 
@@ -668,7 +630,8 @@ p {
   }
 
   .hero,
-  .section--split {
+  .section--split,
+  .site-footer__grid {
     grid-template-columns: 1fr;
   }
 
@@ -685,11 +648,7 @@ p {
   }
 
   .hero__visual {
-    min-height: 22rem;
-  }
-
-  .hero-frame--primary {
-    inset: 0 2rem 3.75rem 0;
+    min-height: 20rem;
   }
 
   .repo-grid,
@@ -698,7 +657,8 @@ p {
   }
 
   .site-footer__meta {
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -731,19 +691,11 @@ p {
   }
 
   .hero__visual {
-    min-height: 18rem;
+    min-height: 17rem;
   }
 
-  .hero-frame--primary {
-    inset: 0 0 4.5rem 0;
+  .hero-frame {
     padding: 1.75rem;
-  }
-
-  .hero-panel {
-    left: 0.75rem;
-    right: 0.75rem;
-    bottom: 0;
-    min-width: auto;
   }
 
   .color-card__actions,
@@ -751,5 +703,10 @@ p {
   .site-footer__meta {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
   }
 }

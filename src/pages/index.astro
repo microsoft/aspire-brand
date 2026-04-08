@@ -15,7 +15,6 @@ const cssVarBlock = `:root {
   --aspire-color-black: #1f1e33;
   --aspire-color-white: #ffffff;
 }`;
-const heroPalette = ['#7455DD', '#512BD4', '#B9AAEE', '#DCD5F6'];
 
 const repositoryAreas = [
   {
@@ -133,7 +132,7 @@ const guidance = [
     <section class="hero">
       <div class="hero__copy">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="sparkles" size={14} />
+          <Icon name="sparkles" size={16} />
           <span>Aspire brand</span>
         </p>
         <h1>Official logos, colors, and presentation assets for Aspire.</h1>
@@ -152,22 +151,8 @@ const guidance = [
       </div>
 
       <div class="hero__visual" aria-hidden="true">
-        <div class="hero-frame hero-frame--primary">
+        <div class="hero-frame hero-frame--primary" data-parallax data-parallax-speed="0.08">
           <img src={`${basePath}logo/aspire-logo-256.svg`} alt="" class="hero-frame__image hero-frame__image--primary" />
-        </div>
-
-        <div class="hero-panel">
-          <p class="hero-panel__label">Preview themes</p>
-          <div class="hero-panel__chips">
-            <span class="hero-panel__chip">Light</span>
-            <span class="hero-panel__chip">Dark</span>
-            <span class="hero-panel__chip">System</span>
-          </div>
-          <div class="hero-panel__swatches">
-            {heroPalette.map((swatch) => (
-              <span class="hero-panel__swatch" style={`background:${swatch}`}></span>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -176,7 +161,7 @@ const guidance = [
       <div>
         <div class="section__header">
           <p class="eyebrow eyebrow--icon">
-            <Icon name="layers" size={14} />
+            <Icon name="layers" size={16} />
             <span>Approach</span>
           </p>
           <h2>Keep the repo asset-first and easy to consume.</h2>
@@ -210,7 +195,7 @@ const guidance = [
     <section class="section" id="logos">
       <div class="section__header">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="image" size={14} />
+          <Icon name="image" size={16} />
           <span>Logos</span>
         </p>
         <h2>Official SVG files for reuse.</h2>
@@ -249,7 +234,7 @@ const guidance = [
     <section class="section" id="colors">
       <div class="section__header">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="palette" size={14} />
+          <Icon name="palette" size={16} />
           <span>Colors</span>
         </p>
         <h2>The current Aspire palette.</h2>
@@ -281,7 +266,7 @@ const guidance = [
     <section class="section" id="css-vars">
       <div class="section__header">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="code" size={14} />
+          <Icon name="code" size={16} />
           <span>CSS variables</span>
         </p>
         <h2>Use official tokens in your styles.</h2>
@@ -305,7 +290,7 @@ const guidance = [
     <section class="section" id="guidance">
       <div class="section__header">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="compass" size={14} />
+          <Icon name="compass" size={16} />
           <span>Guidance</span>
         </p>
         <h2>Simple rules that keep Aspire recognizable.</h2>
@@ -324,7 +309,7 @@ const guidance = [
     <section class="section" id="slides">
       <div class="section__header">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="presentation" size={14} />
+          <Icon name="presentation" size={16} />
           <span>Presentation materials</span>
         </p>
         <h2>The current intro deck is part of the brand repository too.</h2>
@@ -348,7 +333,7 @@ const guidance = [
     <section class="section" id="license">
       <article class="license-card">
         <p class="eyebrow eyebrow--icon">
-          <Icon name="shield" size={14} />
+          <Icon name="shield" size={16} />
           <span>License</span>
         </p>
         <h2>CC0 for artwork, trademark protections remain in place.</h2>

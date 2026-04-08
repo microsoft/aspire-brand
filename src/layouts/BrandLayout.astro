@@ -36,7 +36,7 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
     <link rel="canonical" href={canonical} />
   </head>
   <body>
-    <div class="shell">
+    <div class="shell" id="top">
       <header class="site-header page">
         <a class="site-brand" href={basePath}>
           <span class="site-brand__title">Aspire Brand</span>
@@ -55,41 +55,70 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
       <slot />
 
       <footer class="site-footer">
-        <div class="site-footer__intro">
-          <p class="eyebrow eyebrow--icon">
-            <Icon name="sparkles" size={14} />
-            <span>Stay on brand</span>
-          </p>
-          <h2 class="site-footer__title">Everything you need for Aspire logos, colors, and naming guidance.</h2>
-          <p class="site-footer__summary">
-            Use this site for official brand assets and styling references, and use aspire.dev for product docs and
-            supporting content.
-          </p>
-        </div>
+        <div class="site-footer__grid">
+          <section class="site-footer__column site-footer__column--brand">
+            <p class="eyebrow eyebrow--icon">
+              <Icon name="sparkles" size={16} />
+              <span>Stay on brand</span>
+            </p>
+            <h2 class="site-footer__title">Aspire brand assets, colors, and guidance in one place.</h2>
+            <p class="site-footer__summary">
+              Use this site for official brand assets and styling references, and use aspire.dev for product docs and
+              supporting content.
+            </p>
+          </section>
 
-        <nav class="site-footer__links" aria-label="Footer">
-          <a class="footer-link" href="#logos">Logos</a>
-          <a class="footer-link" href="#colors">Colors</a>
-          <a class="footer-link" href="#guidance">Guidance</a>
-          <a class="footer-link" href="#slides">Slides</a>
-          <a class="footer-link" href="https://aspire.dev" rel="noreferrer" target="_blank">
-            <Icon name="book" size={16} />
-            <span>aspire.dev</span>
-          </a>
-          <a class="footer-link" href={repoUrl} rel="noreferrer" target="_blank">
-            <Icon name="github" size={16} />
-            <span>GitHub</span>
-          </a>
-        </nav>
+          <section class="site-footer__column">
+            <h3>Browse</h3>
+            <nav class="site-footer__list" aria-label="Brand sections">
+              <a class="footer-nav-link" href="#logos">
+                <Icon name="image" size={16} />
+                <span>Logos</span>
+              </a>
+              <a class="footer-nav-link" href="#colors">
+                <Icon name="palette" size={16} />
+                <span>Colors</span>
+              </a>
+              <a class="footer-nav-link" href="#guidance">
+                <Icon name="compass" size={16} />
+                <span>Guidance</span>
+              </a>
+              <a class="footer-nav-link" href="#slides">
+                <Icon name="presentation" size={16} />
+                <span>Slides</span>
+              </a>
+            </nav>
+          </section>
+
+          <section class="site-footer__column">
+            <h3>Official links</h3>
+            <div class="site-footer__list">
+              <a class="footer-nav-link" href="https://aspire.dev" rel="noreferrer" target="_blank">
+                <Icon name="book" size={16} />
+                <span>aspire.dev</span>
+              </a>
+              <a class="footer-nav-link" href={repoUrl} rel="noreferrer" target="_blank">
+                <Icon name="github" size={16} />
+                <span>GitHub</span>
+              </a>
+              <a class="footer-nav-link" href="#license">
+                <Icon name="shield" size={16} />
+                <span>License</span>
+              </a>
+            </div>
+          </section>
+        </div>
 
         <div class="site-footer__meta">
           <p>Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
-          <a class="footer-link footer-link--top" href={basePath}>
-            <span>Back to top</span>
-          </a>
         </div>
       </footer>
     </div>
+
+    <a class="back-to-top" href="#top" data-back-to-top aria-label="Back to top">
+      <Icon name="arrow-up" size={16} />
+      <span>Top</span>
+    </a>
 
     <script is:inline>
       document.addEventListener('click', async (event) => {
@@ -132,6 +161,46 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
           }, 1600);
         }
       });
+
+      (() => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const backToTop = document.querySelector('[data-back-to-top]');
+        const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
+        let ticking = false;
+
+        const updateScrollEffects = () => {
+          const offset = Math.min(window.scrollY * 0.08, 28);
+
+          if (backToTop instanceof HTMLElement) {
+            backToTop.classList.toggle('is-visible', window.scrollY > 320);
+          }
+
+          if (!reduceMotion) {
+            parallaxItems.forEach((item) => {
+              if (item instanceof HTMLElement) {
+                item.style.transform = `translate3d(0, ${offset}px, 0)`;
+              }
+            });
+          }
+
+          ticking = false;
+        };
+
+        updateScrollEffects();
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (ticking) {
+              return;
+            }
+
+            ticking = true;
+            window.requestAnimationFrame(updateScrollEffects);
+          },
+          { passive: true },
+        );
+      })();
     </script>
   </body>
 </html>
