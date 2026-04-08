@@ -15,6 +15,12 @@ const cssVarBlock = `:root {
   --aspire-color-black: #1f1e33;
   --aspire-color-white: #ffffff;
 }`;
+const quickLinks = [
+  { href: '#logos', icon: 'image' as const, label: 'Logos' },
+  { href: '#colors', icon: 'palette' as const, label: 'Colors' },
+  { href: '#guidance', icon: 'compass' as const, label: 'Guidance' },
+  { href: '#slides', icon: 'presentation' as const, label: 'Slides' },
+];
 
 const repositoryAreas = [
   {
@@ -148,6 +154,15 @@ const guidance = [
             <span>Open GitHub</span>
           </a>
         </div>
+
+        <nav class="section-nav" aria-label="Jump to section">
+          {quickLinks.map((link) => (
+            <a class="section-nav__link" href={link.href}>
+              <Icon name={link.icon} size={16} />
+              <span>{link.label}</span>
+            </a>
+          ))}
+        </nav>
       </div>
 
       <div class="hero__visual" aria-hidden="true">
