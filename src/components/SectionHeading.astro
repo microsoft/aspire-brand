@@ -21,17 +21,13 @@ const { anchorId, eyebrow, icon, title, description } = Astro.props;
 ---
 
 <div class="section__header">
-  <p class="eyebrow eyebrow--icon">
-    <Icon name={icon} size={16} />
+  <a class="eyebrow eyebrow--icon eyebrow--anchor" href={`#${anchorId}`}>
+    <Icon name={icon} size={18} />
     <span>{eyebrow}</span>
-  </p>
-  <h2 class="section-heading">
-    <a class="section-heading__link" href={`#${anchorId}`}>
-      <span>{title}</span>
-      <span class="section-heading__icon" aria-hidden="true">
-        <Icon name="link" size={16} />
-      </span>
-    </a>
-  </h2>
+    <span class="eyebrow__anchor" aria-hidden="true">
+      <Icon name="link" size={14} />
+    </span>
+  </a>
+  <h2 class="section-heading">{title}</h2>
   {description && <p>{description}</p>}
 </div>

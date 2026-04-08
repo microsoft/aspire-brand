@@ -215,11 +215,17 @@ const guidanceGroups = [
           Aspire in front of people with confidence.
         </p>
         <div class="actions">
-          <a class="button" href="#logos">Get logos</a>
-          <a class="button button--secondary" href="#colors">See colors</a>
+          <a class="button button--jump" href="#logos">
+            <Icon name="image" size={18} />
+            <span>Browse logos</span>
+          </a>
+          <a class="button button--secondary button--jump" href="#colors">
+            <Icon name="palette" size={18} />
+            <span>Explore colors</span>
+          </a>
           <a class="button button--ghost" href={repoUrl} rel="noreferrer" target="_blank">
             <Icon name="github" size={16} />
-            <span>Open GitHub</span>
+            <span>View GitHub</span>
           </a>
         </div>
 
@@ -469,10 +475,6 @@ const guidanceGroups = [
           Microsoft&apos;s trademark rights and brand review expectations.
         </p>
         <div class="link-row">
-          <a class="pill-link" href={`${basePath}LICENSE`} download>
-            <Icon name="download" size={16} />
-            <span>Download license</span>
-          </a>
           <a class="pill-link" href={repoUrl} rel="noreferrer" target="_blank">
             <Icon name="github" size={16} />
             <span>View on GitHub</span>

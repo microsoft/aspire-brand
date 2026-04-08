@@ -11,6 +11,7 @@ const {
 const basePath = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const repoUrl = 'https://github.com/microsoft/aspire-brand';
+const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -120,7 +121,8 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
         </div>
 
         <div class="site-footer__meta">
-          <p class="site-footer__legal">Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
+          <p class="site-footer__legal">Aspire artwork is available under CC0 1.0. Microsoft retains trademark rights in the Aspire name and logo.</p>
+          <p class="site-footer__copyright">&copy; {currentYear} Microsoft</p>
         </div>
       </footer>
     </div>
