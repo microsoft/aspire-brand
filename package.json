@@ -12,6 +12,7 @@
   },
   "license": "CC0-1.0",
   "dependencies": {
+    "@fontsource/poppins": "^5.2.7",
     "astro": "^6.1.4",
     "vite-plugin-static-copy": "^4.0.1"
   }

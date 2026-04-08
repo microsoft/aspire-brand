@@ -1,4 +1,6 @@
 ---
+import Icon from '../components/Icon.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import '../styles/global.css';
 
 const {
@@ -8,6 +10,7 @@ const {
 
 const basePath = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const repoUrl = 'https://github.com/microsoft/aspire-brand';
 ---
 
 <!doctype html>
@@ -15,18 +18,95 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        const storageKey = 'aspire-brand-theme';
+        const preference = localStorage.getItem(storageKey) || 'system';
+        const resolvedTheme =
+          preference === 'system'
+            ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            : preference;
+
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = resolvedTheme;
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={`${basePath}logo/aspire-logo-32.svg`} />
   </head>
   <body>
     <div class="shell">
+      <header class="site-header page">
+        <a class="site-brand" href={basePath}>
+          <span class="site-brand__title">Aspire Brand</span>
+          <span class="site-brand__subtitle">Official guidelines and downloadable assets</span>
+        </a>
+
+        <div class="site-header__actions">
+          <a class="header-link" href={repoUrl} rel="noreferrer" target="_blank">
+            <Icon name="github" size={16} />
+            <span>GitHub</span>
+          </a>
+          <ThemeToggle />
+        </div>
+      </header>
+
       <slot />
+
       <footer class="site-footer">
-        <p>Official Aspire brand assets and guidance, published from this repository.</p>
-        <p>Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
+        <p>Official Aspire brand assets, color references, and usage guidance.</p>
+        <div class="site-footer__meta">
+          <a class="footer-link" href={repoUrl} rel="noreferrer" target="_blank">
+            <Icon name="github" size={16} />
+            <span>microsoft/aspire-brand</span>
+          </a>
+          <p>Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
+        </div>
       </footer>
     </div>
+
+    <script is:inline>
+      document.addEventListener('click', async (event) => {
+        const button = event.target instanceof Element ? event.target.closest('[data-copy]') : null;
+        if (!(button instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        const value = button.getAttribute('data-copy');
+        if (!value) {
+          return;
+        }
+
+        const label = button.querySelector('.copy-button__label');
+        const originalLabel = button.dataset.copyOriginal || label?.textContent || 'Copy';
+        const successLabel = button.dataset.copySuccess || 'Copied';
+
+        button.dataset.copyOriginal = originalLabel;
+
+        try {
+          await navigator.clipboard.writeText(value);
+          if (label) {
+            label.textContent = successLabel;
+          }
+
+          window.setTimeout(() => {
+            if (label) {
+              label.textContent = originalLabel;
+            }
+          }, 1600);
+        } catch {
+          if (label) {
+            label.textContent = 'Copy failed';
+          }
+
+          window.setTimeout(() => {
+            if (label) {
+              label.textContent = originalLabel;
+            }
+          }, 1600);
+        }
+      });
+    </script>
   </body>
 </html>

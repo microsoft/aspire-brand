@@ -1,15 +1,26 @@
 ---
 import BrandLayout from '../layouts/BrandLayout.astro';
+import CopyButton from '../components/CopyButton.astro';
+import Icon from '../components/Icon.astro';
 
 const basePath = import.meta.env.BASE_URL;
 const repoUrl = 'https://github.com/microsoft/aspire-brand';
 const deckPath = `${basePath}slides/intro/Aspire-Spring26-IntroDeck.pptx`;
+const cssVarBlock = `:root {
+  --aspire-color-primary: #7455dd;
+  --aspire-color-purple: #512bd4;
+  --aspire-color-secondary: #b9aaee;
+  --aspire-color-muted: #dcd5f6;
+  --aspire-color-grey: #dce0e8;
+  --aspire-color-black: #1f1e33;
+  --aspire-color-white: #ffffff;
+}`;
 
 const repositoryAreas = [
   {
     path: 'logo/',
     title: 'Official SVGs',
-    description: 'A small set of official Aspire logo files copied directly from the aspire.dev frontend assets.',
+    description: 'Official Aspire logo files sized for brand surfaces, documentation, and presentations.',
   },
   {
     path: 'slides/',
@@ -27,32 +38,20 @@ const logoAssets = [
   {
     title: 'Aspire logo (256)',
     description:
-      'Primary large-format Aspire SVG copied from aspire.dev for documentation, slides, and brand surfaces.',
+      'Primary large-format Aspire SVG for documentation, slides, and brand surfaces.',
     previewClass: 'asset-card__preview--light',
     asset: `${basePath}logo/aspire-logo-256.svg`,
     assetClass: 'asset-card__image asset-card__image--large',
-    sourcePath: 'src/frontend/src/assets/aspire-logo-256.svg',
     downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-256.svg` }],
   },
   {
     title: 'Aspire logo (32)',
     description:
-      'Compact Aspire mark used by the official site for smaller UI placements and tighter layouts.',
+      'Compact Aspire mark for smaller UI placements and tighter layouts.',
     previewClass: 'asset-card__preview--dark',
     asset: `${basePath}logo/aspire-logo-32.svg`,
     assetClass: 'asset-card__image asset-card__image--small',
-    sourcePath: 'src/frontend/src/assets/aspire-logo-32.svg',
     downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-32.svg` }],
-  },
-  {
-    title: 'Aspire favicon',
-    description:
-      'Site icon SVG copied from the public Aspire frontend and suitable for browser or navigation icon usage.',
-    previewClass: 'asset-card__preview--neutral',
-    asset: `${basePath}logo/favicon.svg`,
-    assetClass: 'asset-card__image asset-card__image--small',
-    sourcePath: 'public/favicon.svg',
-    downloads: [{ label: 'Download SVG', href: `${basePath}logo/favicon.svg` }],
   },
 ];
 
@@ -61,7 +60,7 @@ const colorScale = [
     name: 'Aspire primary',
     token: '--aspire-color-primary',
     hex: '#7455DD',
-    description: 'Primary accent token used by the Aspire frontend theme.',
+    description: 'Primary accent token used across Aspire web experiences.',
   },
   {
     name: 'Aspire purple',
@@ -85,38 +84,42 @@ const colorScale = [
     name: 'Aspire grey',
     token: '--aspire-color-grey',
     hex: '#DCE0E8',
-    description: 'Neutral light grey from the official Aspire site theme.',
+    description: 'Neutral light grey used in supporting surfaces and borders.',
   },
   {
     name: 'Aspire black',
     token: '--aspire-color-black',
     hex: '#1F1E33',
-    description: 'Dark foundation color used as the main site background in the Aspire frontend.',
+    description: 'Dark foundation color used for Aspire backgrounds and dark surfaces.',
   },
   {
     name: 'Aspire white',
     token: '--aspire-color-white',
     hex: '#FFFFFF',
-    description: 'Foreground and surface white used throughout the frontend theme.',
+    description: 'Foreground and surface white used throughout Aspire brand applications.',
   },
 ];
 
 const guidance = [
   {
-    title: 'Use the official source files',
-    description: 'Prefer the SVGs copied from aspire.dev rather than recreating or tracing the logo.',
+    title: 'Name the product Aspire',
+    description: 'Always refer to the product as Aspire. Do not call it ".NET Aspire" in brand or marketing materials.',
   },
   {
-    title: 'Preserve proportions',
-    description: 'Do not stretch, crop, redraw, outline, or otherwise reshape the Aspire mark.',
+    title: 'Use aspire.dev for docs and content',
+    description: 'Point people to aspire.dev for official documentation, product content, and messaging updates.',
   },
   {
-    title: 'Keep the fills intact',
-    description: 'Retain the existing multitone fills and use the official palette values when pairing the logo with site or deck styling.',
+    title: 'Use the official logo files',
+    description: 'Do not redraw, stretch, crop, outline, or otherwise reshape the Aspire mark.',
   },
   {
-    title: 'Avoid unofficial variants',
-    description: 'Do not introduce alternate wordmarks, composite lockups, or icon treatments that are not part of the published asset set.',
+    title: 'Keep the fills and palette intact',
+    description: 'Retain the multitone fills and use the published Aspire palette when pairing the logo with web, deck, or event materials.',
+  },
+  {
+    title: 'Validate in multiple themes',
+    description: 'Preview assets in light, dark, and system themes so contrast and legibility stay strong in every environment.',
   },
 ];
 ---
@@ -131,13 +134,16 @@ const guidance = [
         <p class="eyebrow">Aspire brand</p>
         <h1>Official logos, colors, and presentation assets for Aspire.</h1>
         <p class="lede">
-          A lightweight brand repository with curated SVG downloads, practical usage guidance, and an Astro site
-          built from the official Aspire frontend asset set.
+          A consumer-facing brand guide with curated SVG downloads, practical usage guidance, and a theme-aware Astro
+          site for reviewing Aspire assets in light, dark, or system mode.
         </p>
         <div class="actions">
           <a class="button" href="#logos">Browse logos</a>
           <a class="button button--secondary" href="#colors">View palette</a>
-          <a class="button button--ghost" href={repoUrl} rel="noreferrer" target="_blank">Open repo</a>
+          <a class="button button--ghost" href={repoUrl} rel="noreferrer" target="_blank">
+            <Icon name="github" size={16} />
+            <span>Open repo</span>
+          </a>
         </div>
       </div>
 
@@ -151,8 +157,8 @@ const guidance = [
         </div>
 
         <div class="hero-note">
-          <span>Source of truth</span>
-          <strong>aspire.dev/src/frontend</strong>
+          <span>Preview themes</span>
+          <strong>Light, dark, or system</strong>
         </div>
       </div>
     </section>
@@ -163,17 +169,17 @@ const guidance = [
           <p class="eyebrow">Approach</p>
           <h2>Keep the repo asset-first and easy to consume.</h2>
           <p>
-            This repository now mirrors the official Aspire frontend assets instead of introducing alternate logo
-            treatments. The scope stays intentionally small: official SVGs, the current site palette, practical usage
-            guidance, and the current intro deck.
+            This repository stays intentionally focused on the pieces most people need to create on-brand Aspire
+            materials: official logos, approved colors, practical naming and content guidance, and the current intro
+            deck.
           </p>
         </div>
 
         <div class="note-card">
-          <h3>Source of truth</h3>
+          <h3>General guidance</h3>
           <p>
-            Logos come from <code>aspire.dev/src/frontend/src/assets</code> and <code>aspire.dev/src/frontend/public</code>.
-            Theme colors come from <code>aspire.dev/src/frontend/src/styles/site.css</code>.
+            Use this site for brand assets and styling references, and rely on <a href="https://aspire.dev">aspire.dev</a>
+            whenever you need official product docs, messaging, or supporting content.
           </p>
         </div>
       </div>
@@ -194,8 +200,8 @@ const guidance = [
         <p class="eyebrow">Logos</p>
         <h2>Official SVG files for reuse.</h2>
         <p>
-          Download the current Aspire brand assets directly from the repository-backed site. These files are copied
-          from the official Aspire frontend and published here in a simpler asset library.
+          Download the current Aspire brand assets directly from the repository-backed site. These are the public logo
+          files intended for reuse in decks, docs, web pages, and event materials.
         </p>
       </div>
 
@@ -210,9 +216,6 @@ const guidance = [
               <div class="stack">
                 <h3>{logo.title}</h3>
                 <p>{logo.description}</p>
-                <p class="meta-text">
-                  Source: <code>{logo.sourcePath}</code>
-                </p>
               </div>
 
               <div class="link-row">
@@ -231,9 +234,10 @@ const guidance = [
     <section class="section" id="colors">
       <div class="section__header">
         <p class="eyebrow">Colors</p>
-        <h2>The current Aspire frontend palette.</h2>
+        <h2>The current Aspire palette.</h2>
         <p>
-          These color references are taken from the official frontend theme in <code>aspire.dev/src/frontend/src/styles/site.css</code>.
+          Use these values when you need official Aspire color references for websites, presentations, and supporting
+          collateral.
         </p>
       </div>
 
@@ -241,13 +245,41 @@ const guidance = [
         {colorScale.map((color) => (
           <article class="color-card">
             <div class="swatch" style={`background:${color.hex}`}></div>
-            <h3>{color.name}</h3>
-            <p>{color.description}</p>
-            <p class="meta-text">{color.token}</p>
-            <span class="color-card__hex">{color.hex}</span>
+            <div class="stack">
+              <h3>{color.name}</h3>
+              <p>{color.description}</p>
+            </div>
+            <div class="color-card__footer">
+              <p class="meta-text">{color.token}</p>
+              <div class="color-card__actions">
+                <span class="color-card__hex">{color.hex}</span>
+                <CopyButton value={color.hex} label="Copy hex" />
+              </div>
+            </div>
           </article>
         ))}
       </div>
+    </section>
+
+    <section class="section" id="css-vars">
+      <div class="section__header">
+        <p class="eyebrow">CSS variables</p>
+        <h2>Use official tokens in your styles.</h2>
+        <p>
+          If you need to theme a web experience or a demo site, start with the published Aspire color variables below.
+        </p>
+      </div>
+
+      <article class="code-card">
+        <div class="code-card__header">
+          <div class="stack">
+            <h3>Aspire brand variables</h3>
+            <p>Copy the full token block for quick reuse in CSS.</p>
+          </div>
+          <CopyButton value={cssVarBlock} label="Copy CSS vars" />
+        </div>
+        <pre class="code-block"><code>{cssVarBlock}</code></pre>
+      </article>
     </section>
 
     <section class="section" id="guidance">
