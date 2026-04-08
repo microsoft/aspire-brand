@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import astroExpressiveCode from 'astro-expressive-code';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
@@ -6,6 +7,7 @@ const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 export default defineConfig({
   site: 'https://microsoft.github.io',
   base: isGithubActions ? '/aspire-brand/' : '/',
+  integrations: [astroExpressiveCode()],
   vite: {
     plugins: [
       viteStaticCopy({

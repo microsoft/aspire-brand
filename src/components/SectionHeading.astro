@@ -1,0 +1,37 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  anchorId: string;
+  eyebrow: string;
+  icon:
+    | 'sparkles'
+    | 'layers'
+    | 'image'
+    | 'palette'
+    | 'code'
+    | 'compass'
+    | 'presentation'
+    | 'shield';
+  title: string;
+  description?: string;
+}
+
+const { anchorId, eyebrow, icon, title, description } = Astro.props;
+---
+
+<div class="section__header">
+  <p class="eyebrow eyebrow--icon">
+    <Icon name={icon} size={16} />
+    <span>{eyebrow}</span>
+  </p>
+  <h2 class="section-heading">
+    <a class="section-heading__link" href={`#${anchorId}`}>
+      <span>{title}</span>
+      <span class="section-heading__icon" aria-hidden="true">
+        <Icon name="link" size={16} />
+      </span>
+    </a>
+  </h2>
+  {description && <p>{description}</p>}
+</div>

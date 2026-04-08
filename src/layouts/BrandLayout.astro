@@ -29,6 +29,10 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
 
         document.documentElement.dataset.themePreference = preference;
         document.documentElement.dataset.theme = resolvedTheme;
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.dataset.motion = 'enabled';
+        }
       })();
     </script>
     <title>{title}</title>
@@ -44,7 +48,14 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
         </a>
 
         <div class="site-header__actions">
-          <a class="header-link header-link--icon" href={repoUrl} rel="noreferrer" target="_blank" aria-label="GitHub" title="GitHub">
+          <a
+            class="header-link header-link--icon"
+            href={repoUrl}
+            rel="noreferrer"
+            target="_blank"
+            aria-label="Open the Aspire brand GitHub repository"
+            title="Open GitHub repository"
+          >
             <Icon name="github" size={16} />
           </a>
           <ThemeToggle />
@@ -109,7 +120,7 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
         </div>
 
         <div class="site-footer__meta">
-          <p>Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
+          <p class="site-footer__legal">Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
         </div>
       </footer>
     </div>
@@ -165,11 +176,10 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const backToTop = document.querySelector('[data-back-to-top]');
         const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
+        const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
         let ticking = false;
 
         const updateScrollEffects = () => {
-          const offset = Math.min(window.scrollY * 0.08, 28);
-
           if (backToTop instanceof HTMLElement) {
             backToTop.classList.toggle('is-visible', window.scrollY > 320);
           }
@@ -177,6 +187,8 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
           if (!reduceMotion) {
             parallaxItems.forEach((item) => {
               if (item instanceof HTMLElement) {
+                const speed = Number(item.dataset.parallaxSpeed || '0.08');
+                const offset = Math.min(window.scrollY * speed, 28);
                 item.style.transform = `translate3d(0, ${offset}px, 0)`;
               }
             });
@@ -199,6 +211,38 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
           },
           { passive: true },
         );
+
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          revealItems.forEach((item) => {
+            if (item instanceof HTMLElement) {
+              item.classList.add('is-visible');
+            }
+          });
+          return;
+        }
+
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!(entry.target instanceof HTMLElement) || !entry.isIntersecting) {
+                return;
+              }
+
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.16,
+            rootMargin: '0px 0px -10% 0px',
+          },
+        );
+
+        revealItems.forEach((item) => {
+          if (item instanceof HTMLElement) {
+            revealObserver.observe(item);
+          }
+        });
       })();
     </script>
   </body>

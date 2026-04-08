@@ -1,7 +1,9 @@
 ---
+import { Code } from 'astro-expressive-code/components';
 import BrandLayout from '../layouts/BrandLayout.astro';
 import CopyButton from '../components/CopyButton.astro';
 import Icon from '../components/Icon.astro';
+import SectionHeading from '../components/SectionHeading.astro';
 
 const basePath = import.meta.env.BASE_URL;
 const repoUrl = 'https://github.com/microsoft/aspire-brand';
@@ -14,6 +16,15 @@ const cssVarBlock = `:root {
   --aspire-color-grey: #dce0e8;
   --aspire-color-black: #1f1e33;
   --aspire-color-white: #ffffff;
+  --aspire-accent-magenta: #b30f87;
+  --aspire-accent-flamingo: #f65163;
+  --aspire-accent-blue: #0078d7;
+  --aspire-accent-cyan: #0b7e84;
+  --aspire-accent-yellow: #9b8308;
+  --aspire-gradient-purple-magenta: linear-gradient(90deg, #7455dd 0%, #b30f87 100%);
+  --aspire-gradient-blue-purple: linear-gradient(90deg, #0078d7 0%, #7455dd 100%);
+  --aspire-gradient-flamingo-purple: linear-gradient(90deg, #f65163 0%, #7455dd 100%);
+  --aspire-gradient-purple-cyan: linear-gradient(90deg, #7455dd 0%, #0b7e84 100%);
 }`;
 const quickLinks = [
   { href: '#logos', icon: 'image' as const, label: 'Logos' },
@@ -22,21 +33,21 @@ const quickLinks = [
   { href: '#slides', icon: 'presentation' as const, label: 'Slides' },
 ];
 
-const repositoryAreas = [
+const featureHighlights = [
   {
-    label: 'Logos',
+    icon: 'image' as const,
     title: 'Official marks',
-    description: 'Ready-to-use SVG logos for docs, decks, websites, and event materials.',
+    description: 'SVG logo downloads for both focal placements and tighter interface moments.',
   },
   {
-    label: 'Colors',
-    title: 'Core palette',
-    description: 'The key Aspire colors you need for interfaces, visuals, and supporting brand work.',
+    icon: 'palette' as const,
+    title: 'Core and supporting color',
+    description: 'The core purple-led palette, plus expressive accents and gradients for standout moments.',
   },
   {
-    label: 'Slides',
-    title: 'Presentation deck',
-    description: 'A current deck you can start from for talks, demos, and community sessions.',
+    icon: 'presentation' as const,
+    title: 'Presentation starter',
+    description: 'A current deck you can adapt for talks, demos, workshops, and community sessions.',
   },
 ];
 
@@ -44,20 +55,20 @@ const logoAssets = [
   {
     title: 'Aspire logo (256)',
     description:
-      'Best for slides, docs, hero placements, and larger brand moments.',
+     'Best for slides, docs, hero placements, and larger brand moments.',
     previewClass: 'asset-card__preview--light',
     asset: `${basePath}logo/aspire-logo-256.svg`,
     assetClass: 'asset-card__image asset-card__image--large',
-    downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-256.svg` }],
+    downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-256.svg`, icon: 'download' as const }],
   },
   {
     title: 'Aspire logo (32)',
     description:
-      'Best for tighter UI placements or places where the mark needs to stay compact.',
+     'Best for tighter UI placements or places where the mark needs to stay compact.',
     previewClass: 'asset-card__preview--dark',
     asset: `${basePath}logo/aspire-logo-32.svg`,
     assetClass: 'asset-card__image asset-card__image--small',
-    downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-32.svg` }],
+    downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-32.svg`, icon: 'download' as const }],
   },
 ];
 
@@ -106,26 +117,83 @@ const colorScale = [
   },
 ];
 
-const guidance = [
+const supportingAccents = [
   {
-    title: 'Say Aspire',
-    description: 'Use Aspire in brand and marketing copy. Avoid calling the product ".NET Aspire".',
+    name: 'Accent magenta',
+    hex: '#B30F87',
   },
   {
-    title: 'Send people to aspire.dev',
-    description: 'Use aspire.dev for official docs, product info, and supporting content.',
+    name: 'Accent flamingo',
+    hex: '#F65163',
   },
   {
-    title: 'Use the provided marks',
-    description: 'Do not redraw, stretch, crop, outline, or otherwise reshape the Aspire logo.',
+    name: 'Accent blue',
+    hex: '#0078D7',
   },
   {
-    title: 'Keep the palette relationships intact',
-    description: 'Use the core colors as provided so Aspire stays recognizable across surfaces.',
+    name: 'Accent cyan',
+    hex: '#0B7E84',
   },
   {
-    title: 'Check light and dark surfaces',
-    description: 'Make sure the logo stays crisp, readable, and balanced wherever it appears.',
+    name: 'Accent yellow',
+    hex: '#9B8308',
+  },
+];
+
+const gradients = [
+  {
+    name: 'Purple to magenta',
+    value: 'linear-gradient(90deg, #7455DD 0%, #B30F87 100%)',
+    guidance: 'Use for hero accents, highlights, or editorial-style flourishes.',
+  },
+  {
+    name: 'Blue to purple',
+    value: 'linear-gradient(90deg, #0078D7 0%, #7455DD 100%)',
+    guidance: 'Works well for product-led visuals, diagrams, and directional emphasis.',
+  },
+  {
+    name: 'Flamingo to purple',
+    value: 'linear-gradient(90deg, #F65163 0%, #7455DD 100%)',
+    guidance: 'Bring in warmer energy for campaign moments and bold callouts.',
+  },
+  {
+    name: 'Purple to cyan',
+    value: 'linear-gradient(90deg, #7455DD 0%, #0B7E84 100%)',
+    guidance: 'Use sparingly when the layout needs a cleaner, more technical accent.',
+  },
+];
+
+const guidanceGroups = [
+  {
+    icon: 'sparkles' as const,
+    title: 'Naming and source',
+    description: 'Keep the language consistent and send people to the right place for product detail.',
+    items: [
+      'Call the product Aspire. Avoid using ".NET Aspire" in brand and marketing copy.',
+      'Use aspire.dev when you need official docs, product explanation, or supporting content.',
+      'Write in a way that helps people quickly understand what Aspire is and why it matters.',
+    ],
+  },
+  {
+    icon: 'image' as const,
+    title: 'Logo handling',
+    description: 'Borrowing from strong brand systems, keep the mark protected, crisp, and easy to recognize.',
+    items: [
+      'Use the supplied SVG files without redrawing, outlining, rotating, stretching, or recoloring the mark.',
+      'Give the logo breathing room so it never feels crowded by surrounding UI, text, or partner marks.',
+      'Use the compact mark when space is tight and the larger mark when the brand should feel more prominent.',
+      'Choose high-contrast backgrounds so the facets remain clear in both light and dark themes.',
+    ],
+  },
+  {
+    icon: 'compass' as const,
+    title: 'Voice and tone',
+    description: 'The page should read like a helpful brand system, not an internal repo note.',
+    items: [
+      'Keep the tone clear, helpful, direct, and approachable.',
+      'Lead with benefits and understanding first, then add the supporting detail people need.',
+      'Let the core purple system lead and use accent colors or gradients as supporting expression, not the whole interface.',
+    ],
   },
 ];
 ---
@@ -172,52 +240,50 @@ const guidance = [
       </div>
     </section>
 
-    <section class="section section--split" id="about">
-      <div>
-        <div class="section__header">
-          <p class="eyebrow eyebrow--icon">
-            <Icon name="layers" size={16} />
-            <span>What&apos;s here</span>
-          </p>
-          <h2>A focused brand kit for everyday use.</h2>
-          <p>
-            Everything here is meant to help you move quickly: the official marks, the core colors, a short set of
-            naming rules, and a current presentation deck.
-          </p>
+    <section class="section section--accented section--about" id="about" data-reveal>
+      <div class="section--split">
+        <div>
+          <SectionHeading
+            anchorId="about"
+            eyebrow="What&apos;s here"
+            icon="layers"
+            title="A focused brand kit for everyday use."
+            description="Everything here is meant to help you move quickly without losing clarity: the official marks, the core colors, a stronger set of brand rules, and a current presentation deck."
+          />
+
+          <div class="note-card">
+            <h3>Use this page for brand assets.</h3>
+            <p>
+              When you need product docs, deeper explanation, or supporting content, send people to{' '}
+              <a href="https://aspire.dev" rel="noreferrer" target="_blank">aspire.dev</a>.
+            </p>
+          </div>
         </div>
 
-        <div class="note-card">
-          <h3>Start here</h3>
-          <p>
-            Use this page for brand assets and visual guidance. When you need product docs, the product story, or
-            supporting content, send people to <a href="https://aspire.dev">aspire.dev</a>.
-          </p>
-        </div>
-      </div>
-
-      <div class="repo-grid">
-        {repositoryAreas.map((area) => (
-          <article class="repo-card">
-            <p class="repo-card__path">{area.label}</p>
-            <h3>{area.title}</h3>
-            <p>{area.description}</p>
-          </article>
-        ))}
+        <ul class="feature-list" role="list">
+          {featureHighlights.map((item) => (
+            <li class="feature-list__item">
+              <span class="feature-list__icon" aria-hidden="true">
+                <Icon name={item.icon} size={18} />
+              </span>
+              <div class="feature-list__content">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
-    <section class="section" id="logos">
-      <div class="section__header">
-        <p class="eyebrow eyebrow--icon">
-          <Icon name="image" size={16} />
-          <span>Logos</span>
-        </p>
-        <h2>Use the official Aspire marks.</h2>
-        <p>
-          Choose the size that best fits the space, then keep the shape and color relationships intact.
-        </p>
-      </div>
-
+    <section class="section section--accented section--logos" id="logos" data-reveal>
+      <SectionHeading
+        anchorId="logos"
+        eyebrow="Logos"
+        icon="image"
+        title="Use the official Aspire marks."
+        description="Choose the size that best fits the space, then keep the shape and color relationships intact."
+      />
       <div class="asset-grid">
         {logoAssets.map((logo) => (
           <article class="asset-card">
@@ -234,7 +300,8 @@ const guidance = [
               <div class="link-row">
                 {logo.downloads.map((download) => (
                   <a class="pill-link" href={download.href} download>
-                    {download.label}
+                    <Icon name={download.icon} size={16} />
+                    <span>{download.label}</span>
                   </a>
                 ))}
               </div>
@@ -244,18 +311,14 @@ const guidance = [
       </div>
     </section>
 
-    <section class="section" id="colors">
-      <div class="section__header">
-        <p class="eyebrow eyebrow--icon">
-          <Icon name="palette" size={16} />
-          <span>Colors</span>
-        </p>
-        <h2>Core Aspire colors.</h2>
-        <p>
-          Use these values when you need brand-aligned color in decks, sites, demos, or supporting visuals.
-        </p>
-      </div>
-
+    <section class="section section--accented section--colors" id="colors" data-reveal>
+      <SectionHeading
+        anchorId="colors"
+        eyebrow="Colors"
+        icon="palette"
+        title="Core Aspire colors."
+        description="Use the core colors most often, then bring in accent colors and gradients when you need more expression without losing recognizability."
+      />
       <div class="color-grid">
         {colorScale.map((color) => (
           <article class="color-card">
@@ -266,96 +329,154 @@ const guidance = [
             </div>
             <div class="color-card__footer">
               <div class="color-card__actions">
-                <span class="color-card__hex">{color.hex}</span>
-                <CopyButton value={color.hex} label="Copy" />
+                <code class="color-card__hex">{color.hex}</code>
+                <CopyButton value={color.hex} label="Copy" ariaLabel={`Copy ${color.hex}`} />
               </div>
             </div>
           </article>
         ))}
       </div>
+
+      <div class="color-showcase">
+        <div>
+          <div class="section-subhead">
+            <h3>Supporting accents</h3>
+            <p>Use these sparingly for diagrams, highlights, editorial moments, or motion accents around the core palette.</p>
+          </div>
+          <ul class="accent-spectrum__list" role="list">
+            {supportingAccents.map((accent) => (
+              <li class="accent-chip">
+                <span class="accent-chip__swatch" style={`background:${accent.hex}`}></span>
+                <span class="accent-chip__name">{accent.name}</span>
+                <code class="accent-chip__hex">{accent.hex}</code>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <div class="section-subhead">
+            <h3>Supporting gradients</h3>
+            <p>Use gradients as a controlled highlight. Let them add energy, but keep the surrounding layout calm and readable.</p>
+          </div>
+          <ul class="gradient-list" role="list">
+            {gradients.map((gradient) => (
+              <li class="gradient-band">
+                <div class="gradient-band__swatch" aria-hidden="true" style={`background:${gradient.value}`}></div>
+                <div class="gradient-band__body">
+                  <h4>{gradient.name}</h4>
+                  <p>{gradient.guidance}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section class="section" id="css-vars">
-      <div class="section__header">
-        <p class="eyebrow eyebrow--icon">
-          <Icon name="code" size={16} />
-          <span>CSS variables</span>
-        </p>
-        <h2>Ready-to-use color tokens.</h2>
-        <p>
-          If you&apos;re styling a web experience or demo, start with these tokens.
-        </p>
-      </div>
-
+    <section class="section section--accented section--css" id="css-vars" data-reveal>
+      <SectionHeading
+        anchorId="css-vars"
+        eyebrow="CSS variables"
+        icon="code"
+        title="Ready-to-use color tokens."
+        description="If you&apos;re styling a web experience or demo, start here and trim the block to the tokens you actually need."
+      />
       <article class="code-card">
         <div class="code-card__header">
           <div class="stack">
             <h3>Aspire CSS variables</h3>
-            <p>Use this block as a starting point for implementation.</p>
+            <p>Use this as a clean starting point for implementation.</p>
           </div>
-          <CopyButton value={cssVarBlock} label="Copy CSS vars" />
+          <CopyButton value={cssVarBlock} label="Copy CSS vars" ariaLabel="Copy Aspire CSS variables" />
         </div>
-        <pre class="code-block"><code>{cssVarBlock}</code></pre>
+        <Code code={cssVarBlock} lang="css" title="aspire-brand-tokens.css" />
       </article>
     </section>
 
-    <section class="section" id="guidance">
-      <div class="section__header">
-        <p class="eyebrow eyebrow--icon">
-          <Icon name="compass" size={16} />
-          <span>Guidance</span>
-        </p>
-        <h2>A few simple rules go a long way.</h2>
-      </div>
+    <section class="section section--accented section--guidance" id="guidance" data-reveal>
+      <SectionHeading
+        anchorId="guidance"
+        eyebrow="Guidance"
+        icon="compass"
+        title="A few simple rules go a long way."
+        description="The strongest brand systems communicate clearly: they protect the mark, keep the language precise, and let the experience feel approachable."
+      />
 
-      <div class="guidance-grid">
-        {guidance.map((item) => (
-          <article class="guidance-card">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </article>
+      <div class="guidance-groups">
+        {guidanceGroups.map((group) => (
+          <section class="guidance-group">
+            <div class="guidance-group__header">
+              <span class="guidance-group__icon" aria-hidden="true">
+                <Icon name={group.icon} size={18} />
+              </span>
+              <div class="stack">
+                <h3>{group.title}</h3>
+                <p>{group.description}</p>
+              </div>
+            </div>
+
+            <ul class="guidance-list" role="list">
+              {group.items.map((item) => (
+                <li>
+                  <Icon name="check-circle" size={16} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
       </div>
     </section>
 
-    <section class="section" id="slides">
-      <div class="section__header">
-        <p class="eyebrow eyebrow--icon">
-          <Icon name="presentation" size={16} />
-          <span>Presentation materials</span>
-        </p>
-        <h2>Start from the current deck.</h2>
-      </div>
-
+    <section class="section section--accented section--slides" id="slides" data-reveal>
+      <SectionHeading
+        anchorId="slides"
+        eyebrow="Presentation materials"
+        icon="presentation"
+        title="Start from the current deck."
+        description="Use the latest deck as a starting point for talks, demos, and community sessions, then tailor it to the audience."
+      />
       <article class="download-card">
-        <h3>Aspire Spring 2026 intro deck</h3>
-        <p>
-          Use the current deck as a starting point for talks, demos, and community sessions about Aspire.
-        </p>
-        <p class="download-card__meta">PowerPoint (.pptx)</p>
+        <div class="download-card__copy">
+          <h3>Aspire Spring 2026 intro deck</h3>
+          <p>
+            Use the current deck as a starting point for talks, demos, and community sessions about Aspire.
+          </p>
+          <p class="download-card__meta">PowerPoint (.pptx)</p>
+        </div>
         <div class="link-row">
           <a class="pill-link" href={deckPath} download>
-            Download deck
+            <Icon name="download" size={16} />
+            <span>Download deck</span>
           </a>
         </div>
       </article>
     </section>
 
-    <section class="section" id="license">
+    <section class="section section--accented section--license" id="license" data-reveal>
+      <SectionHeading
+        anchorId="license"
+        eyebrow="License"
+        icon="shield"
+        title="Use the artwork broadly. Respect the trademark."
+        description="The artwork is open for reuse. The Aspire name and logo remain protected marks."
+      />
       <article class="license-card">
-        <p class="eyebrow eyebrow--icon">
-          <Icon name="shield" size={16} />
-          <span>License</span>
-        </p>
-        <h2>Use the artwork broadly. Respect the trademark.</h2>
         <p>
           The artwork in this brand kit is released under CC0 1.0 for broad reuse in decks, blog posts, and other
           Aspire-related content. Trademark rights are not waived; the Aspire name and logo remain subject to
           Microsoft&apos;s trademark rights and brand review expectations.
         </p>
         <div class="link-row">
-          <a class="pill-link" href={`${basePath}LICENSE`} download>Read the license</a>
-          <a class="pill-link" href={repoUrl} rel="noreferrer" target="_blank">View on GitHub</a>
+          <a class="pill-link" href={`${basePath}LICENSE`} download>
+            <Icon name="download" size={16} />
+            <span>Download license</span>
+          </a>
+          <a class="pill-link" href={repoUrl} rel="noreferrer" target="_blank">
+            <Icon name="github" size={16} />
+            <span>View on GitHub</span>
+          </a>
         </div>
       </article>
     </section>
