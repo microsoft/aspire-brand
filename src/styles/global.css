@@ -1004,7 +1004,6 @@ p {
   gap: 1rem;
   align-items: center;
   padding: 1rem 0 0;
-  border-top: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
 }
 
 .site-footer__legal {
