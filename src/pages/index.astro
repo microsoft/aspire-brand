@@ -27,10 +27,10 @@ const cssVarBlock = `:root {
   --aspire-gradient-purple-cyan: linear-gradient(90deg, #7455dd 0%, #0b7e84 100%);
 }`;
 const quickLinks = [
-  { href: '#logos', icon: 'image' as const, label: 'Logos' },
-  { href: '#colors', icon: 'palette' as const, label: 'Colors' },
-  { href: '#guidance', icon: 'compass' as const, label: 'Guidance' },
-  { href: '#slides', icon: 'presentation' as const, label: 'Slides' },
+  { href: '#logos', label: 'Logos' },
+  { href: '#colors', label: 'Colors' },
+  { href: '#guidance', label: 'Guidance' },
+  { href: '#slides', label: 'Slides' },
 ];
 
 const featureHighlights = [
@@ -196,25 +196,10 @@ const guidanceDonts = [
           Find the official logos, core color references, naming guidance, and presentation material you need to put
           Aspire in front of people with confidence.
         </p>
-        <div class="actions">
-          <a class="button button--jump" href="#logos">
-            <Icon name="image" size={18} />
-            <span>Browse logos</span>
-          </a>
-          <a class="button button--secondary button--jump" href="#colors">
-            <Icon name="palette" size={18} />
-            <span>Explore colors</span>
-          </a>
-          <a class="button button--ghost" href={repoUrl} rel="noreferrer" target="_blank">
-            <Icon name="github" size={16} />
-            <span>View GitHub</span>
-          </a>
-        </div>
-
         <nav class="section-nav" aria-label="Jump to section">
+          <span class="section-nav__label">Jump to</span>
           {quickLinks.map((link) => (
             <a class="section-nav__link" href={link.href}>
-              <Icon name={link.icon} size={16} />
               <span>{link.label}</span>
             </a>
           ))}
