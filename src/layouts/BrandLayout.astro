@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'Aspire Brand Assets',
+  description = 'Official logos, colors, usage guidance, and presentation assets for Aspire.',
+} = Astro.props;
+
+const basePath = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}logo/aspire-mark-outline.svg`} />
+  </head>
+  <body>
+    <div class="shell">
+      <slot />
+      <footer class="site-footer">
+        <p>Official Aspire brand assets and guidance, published from this repository.</p>
+        <p>Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
+      </footer>
+    </div>
+  </body>
+</html>

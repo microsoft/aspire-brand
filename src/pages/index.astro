@@ -1,0 +1,300 @@
+---
+import BrandLayout from '../layouts/BrandLayout.astro';
+
+const basePath = import.meta.env.BASE_URL;
+const repoUrl = 'https://github.com/microsoft/aspire-brand';
+const deckPath = `${basePath}slides/intro/Aspire-Spring26-IntroDeck.pptx`;
+
+const repositoryAreas = [
+  {
+    path: 'logo/',
+    title: 'Logo assets',
+    description: 'Reusable SVGs organized for direct download, including the outlined mark, wordmark, and app icon layers.',
+  },
+  {
+    path: 'slides/',
+    title: 'Presentation materials',
+    description: 'The current Aspire intro deck for talks, demos, and community content.',
+  },
+  {
+    path: 'src/',
+    title: 'Astro site',
+    description: 'A static reference site that keeps the guidance and downloadable assets together.',
+  },
+];
+
+const logoAssets = [
+  {
+    title: 'Outline mark',
+    description:
+      'The multitone Aspire mark copied from the current Maui asset set. Use it on light or neutral surfaces when you need the product symbol without the wordmark.',
+    previewClass: 'asset-card__preview--light',
+    type: 'single',
+    asset: `${basePath}logo/aspire-mark-outline.svg`,
+    assetClass: 'asset-card__image--outline',
+    downloads: [{ label: 'Outline SVG', href: `${basePath}logo/aspire-mark-outline.svg` }],
+  },
+  {
+    title: 'Wordmark',
+    description:
+      'A text-only Aspire wordmark copied from the current VS Code extension asset. Use it on dark backgrounds where the name needs to lead.',
+    previewClass: 'asset-card__preview--dark',
+    type: 'single',
+    asset: `${basePath}logo/text-only/aspire-wordmark-white.svg`,
+    assetClass: 'asset-card__image--wordmark',
+    downloads: [{ label: 'Wordmark SVG', href: `${basePath}logo/text-only/aspire-wordmark-white.svg` }],
+  },
+  {
+    title: 'App icon layers',
+    description:
+      'Foreground and background SVG layers for composing app icon treatments without rasterizing the Aspire mark.',
+    previewClass: 'asset-card__preview--icon',
+    type: 'stacked',
+    background: `${basePath}logo/app-icon/aspire-mark-background.svg`,
+    foreground: `${basePath}logo/app-icon/aspire-mark-foreground.svg`,
+    downloads: [
+      { label: 'Foreground SVG', href: `${basePath}logo/app-icon/aspire-mark-foreground.svg` },
+      { label: 'Background SVG', href: `${basePath}logo/app-icon/aspire-mark-background.svg` },
+    ],
+  },
+];
+
+const colorScale = [
+  {
+    name: 'Primary purple',
+    hex: '#512BD4',
+    description: 'Core Aspire purple used as the anchor color in the current logo system.',
+  },
+  {
+    name: 'Accent 1',
+    hex: '#7455DD',
+    description: 'Secondary contour color pulled from the outlined Aspire mark.',
+  },
+  {
+    name: 'Accent 2',
+    hex: '#9780E5',
+    description: 'Mid-tone contour color used in the outlined Aspire mark.',
+  },
+  {
+    name: 'Accent 3',
+    hex: '#B9AAEE',
+    description: 'Soft edge tone that lightens the outer contour of the mark.',
+  },
+  {
+    name: 'Accent 4',
+    hex: '#DCD5F6',
+    description: 'Lightest logo contour tone in the current official mark artwork.',
+  },
+];
+
+const guidance = [
+  {
+    title: 'Use SVG first',
+    description: 'Prefer the provided vector assets for crisp scaling in docs, decks, websites, and event materials.',
+  },
+  {
+    title: 'Preserve proportions',
+    description: 'Do not stretch, crop, redraw, or reshape the Aspire mark or wordmark.',
+  },
+  {
+    title: 'Match the background to the asset',
+    description: 'Use the white wordmark on dark surfaces and the outlined mark on light or neutral surfaces.',
+  },
+  {
+    title: 'Keep the purple system intact',
+    description: 'Retain the current logo color relationships unless a new approved variant is introduced.',
+  },
+];
+---
+
+<BrandLayout
+  title="Aspire Brand Assets"
+  description="Official Aspire logos, color references, usage guidance, and presentation materials."
+>
+  <main class="page">
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="eyebrow">Aspire brand</p>
+        <h1>Official logos, colors, and presentation assets for Aspire.</h1>
+        <p class="lede">
+          A lightweight brand repository with curated SVG downloads, practical usage guidance, and an Astro site
+          built to publish on GitHub Pages.
+        </p>
+        <div class="actions">
+          <a class="button" href="#logos">Browse logos</a>
+          <a class="button button--secondary" href="#colors">View palette</a>
+          <a class="button button--ghost" href={repoUrl} rel="noreferrer" target="_blank">Open repo</a>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero-card hero-card--outline">
+          <img src={`${basePath}logo/aspire-mark-outline.svg`} alt="" />
+        </div>
+
+        <div class="hero-card hero-card--wordmark">
+          <img src={`${basePath}logo/text-only/aspire-wordmark-white.svg`} alt="" class="hero-card__image--wordmark" />
+        </div>
+
+        <div class="hero-card hero-card--icon">
+          <div class="hero-card__icon">
+            <img src={`${basePath}logo/app-icon/aspire-mark-background.svg`} alt="" class="is-background" />
+            <img src={`${basePath}logo/app-icon/aspire-mark-foreground.svg`} alt="" class="is-foreground" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--split" id="about">
+      <div>
+        <div class="section__header">
+          <p class="eyebrow">Approach</p>
+          <h2>Keep the repo asset-first and easy to consume.</h2>
+          <p>
+            This follows the spirit of <code>dotnet/brand</code>: simple folders for reusable assets, lightweight
+            guidance, and a static site that stays in sync with the repository. The initial scope stays focused on
+            Aspire logos, the current purple logo palette, and presentation materials instead of reproducing every
+            asset type from the .NET brand repo.
+          </p>
+        </div>
+
+        <div class="note-card">
+          <h3>Source of truth</h3>
+          <p>
+            The SVGs in this repository were copied from the main Aspire source repository&apos;s extension and Maui
+            assets, then reorganized for public reuse here.
+          </p>
+        </div>
+      </div>
+
+      <div class="repo-grid">
+        {repositoryAreas.map((area) => (
+          <article class="repo-card">
+            <p class="repo-card__path">{area.path}</p>
+            <h3>{area.title}</h3>
+            <p>{area.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="logos">
+      <div class="section__header">
+        <p class="eyebrow">Logos</p>
+        <h2>Official SVG files for reuse.</h2>
+        <p>
+          Download the current Aspire brand assets directly from the repository-backed site. Use the outlined mark
+          for light surfaces, the white wordmark for dark surfaces, and the app icon layers when you need a composed
+          square treatment.
+        </p>
+      </div>
+
+      <div class="asset-grid">
+        {logoAssets.map((logo) => (
+          <article class="asset-card">
+            <div class={`asset-card__preview ${logo.previewClass}`} aria-hidden="true">
+              {logo.type === 'stacked' ? (
+                <div class="asset-card__stack">
+                  <img src={logo.background} alt="" class="is-background" />
+                  <img src={logo.foreground} alt="" class="is-foreground" />
+                </div>
+              ) : (
+                <img src={logo.asset} alt="" class={logo.assetClass} />
+              )}
+            </div>
+
+            <div class="asset-card__body">
+              <div class="stack">
+                <h3>{logo.title}</h3>
+                <p>{logo.description}</p>
+              </div>
+
+              <div class="link-row">
+                {logo.downloads.map((download) => (
+                  <a class="pill-link" href={download.href} download>
+                    {download.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="colors">
+      <div class="section__header">
+        <p class="eyebrow">Colors</p>
+        <h2>The current Aspire logo palette.</h2>
+        <p>
+          This initial color scale is derived from the official Aspire mark artwork currently checked into the main
+          Aspire repository.
+        </p>
+      </div>
+
+      <div class="color-grid">
+        {colorScale.map((color) => (
+          <article class="color-card">
+            <div class="swatch" style={`background:${color.hex}`}></div>
+            <h3>{color.name}</h3>
+            <p>{color.description}</p>
+            <span class="color-card__hex">{color.hex}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="guidance">
+      <div class="section__header">
+        <p class="eyebrow">Guidance</p>
+        <h2>Simple rules that keep Aspire recognizable.</h2>
+      </div>
+
+      <div class="guidance-grid">
+        {guidance.map((item) => (
+          <article class="guidance-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="slides">
+      <div class="section__header">
+        <p class="eyebrow">Presentation materials</p>
+        <h2>The current intro deck is part of the brand repository too.</h2>
+      </div>
+
+      <article class="download-card">
+        <h3>Aspire Spring 2026 intro deck</h3>
+        <p>
+          Use the current presentation deck as a starting point for talks, demos, and community sessions about
+          Aspire.
+        </p>
+        <p class="download-card__meta">PowerPoint (.pptx)</p>
+        <div class="link-row">
+          <a class="pill-link" href={deckPath} download>
+            Download deck
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="license">
+      <article class="license-card">
+        <p class="eyebrow">License</p>
+        <h2>CC0 for artwork, trademark protections remain in place.</h2>
+        <p>
+          The artwork in this repository is released under CC0 1.0 so it can be reused broadly in community decks,
+          blog posts, and other Aspire-related content. Trademark rights are not waived; the Aspire name and logo
+          remain subject to Microsoft&apos;s trademark rights and brand review expectations.
+        </p>
+        <div class="link-row">
+          <a class="pill-link" href={`${basePath}LICENSE`} download>Read the license</a>
+          <a class="pill-link" href={repoUrl} rel="noreferrer" target="_blank">View repository</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</BrandLayout>
