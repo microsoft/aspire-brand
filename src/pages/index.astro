@@ -8,8 +8,8 @@ const deckPath = `${basePath}slides/intro/Aspire-Spring26-IntroDeck.pptx`;
 const repositoryAreas = [
   {
     path: 'logo/',
-    title: 'Logo assets',
-    description: 'Reusable SVGs organized for direct download, including the outlined mark, wordmark, and app icon layers.',
+    title: 'Official SVGs',
+    description: 'A small set of official Aspire logo files copied directly from the aspire.dev frontend assets.',
   },
   {
     path: 'slides/',
@@ -25,84 +25,98 @@ const repositoryAreas = [
 
 const logoAssets = [
   {
-    title: 'Outline mark',
+    title: 'Aspire logo (256)',
     description:
-      'The multitone Aspire mark copied from the current Maui asset set. Use it on light or neutral surfaces when you need the product symbol without the wordmark.',
+      'Primary large-format Aspire SVG copied from aspire.dev for documentation, slides, and brand surfaces.',
     previewClass: 'asset-card__preview--light',
-    type: 'single',
-    asset: `${basePath}logo/aspire-mark-outline.svg`,
-    assetClass: 'asset-card__image--outline',
-    downloads: [{ label: 'Outline SVG', href: `${basePath}logo/aspire-mark-outline.svg` }],
+    asset: `${basePath}logo/aspire-logo-256.svg`,
+    assetClass: 'asset-card__image asset-card__image--large',
+    sourcePath: 'src/frontend/src/assets/aspire-logo-256.svg',
+    downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-256.svg` }],
   },
   {
-    title: 'Wordmark',
+    title: 'Aspire logo (32)',
     description:
-      'A text-only Aspire wordmark copied from the current VS Code extension asset. Use it on dark backgrounds where the name needs to lead.',
+      'Compact Aspire mark used by the official site for smaller UI placements and tighter layouts.',
     previewClass: 'asset-card__preview--dark',
-    type: 'single',
-    asset: `${basePath}logo/text-only/aspire-wordmark-white.svg`,
-    assetClass: 'asset-card__image--wordmark',
-    downloads: [{ label: 'Wordmark SVG', href: `${basePath}logo/text-only/aspire-wordmark-white.svg` }],
+    asset: `${basePath}logo/aspire-logo-32.svg`,
+    assetClass: 'asset-card__image asset-card__image--small',
+    sourcePath: 'src/frontend/src/assets/aspire-logo-32.svg',
+    downloads: [{ label: 'Download SVG', href: `${basePath}logo/aspire-logo-32.svg` }],
   },
   {
-    title: 'App icon layers',
+    title: 'Aspire favicon',
     description:
-      'Foreground and background SVG layers for composing app icon treatments without rasterizing the Aspire mark.',
-    previewClass: 'asset-card__preview--icon',
-    type: 'stacked',
-    background: `${basePath}logo/app-icon/aspire-mark-background.svg`,
-    foreground: `${basePath}logo/app-icon/aspire-mark-foreground.svg`,
-    downloads: [
-      { label: 'Foreground SVG', href: `${basePath}logo/app-icon/aspire-mark-foreground.svg` },
-      { label: 'Background SVG', href: `${basePath}logo/app-icon/aspire-mark-background.svg` },
-    ],
+      'Site icon SVG copied from the public Aspire frontend and suitable for browser or navigation icon usage.',
+    previewClass: 'asset-card__preview--neutral',
+    asset: `${basePath}logo/favicon.svg`,
+    assetClass: 'asset-card__image asset-card__image--small',
+    sourcePath: 'public/favicon.svg',
+    downloads: [{ label: 'Download SVG', href: `${basePath}logo/favicon.svg` }],
   },
 ];
 
 const colorScale = [
   {
-    name: 'Primary purple',
-    hex: '#512BD4',
-    description: 'Core Aspire purple used as the anchor color in the current logo system.',
-  },
-  {
-    name: 'Accent 1',
+    name: 'Aspire primary',
+    token: '--aspire-color-primary',
     hex: '#7455DD',
-    description: 'Secondary contour color pulled from the outlined Aspire mark.',
+    description: 'Primary accent token used by the Aspire frontend theme.',
   },
   {
-    name: 'Accent 2',
-    hex: '#9780E5',
-    description: 'Mid-tone contour color used in the outlined Aspire mark.',
+    name: 'Aspire purple',
+    token: '--aspire-color-purple',
+    hex: '#512BD4',
+    description: 'Darker companion purple used for gradients and hover states.',
   },
   {
-    name: 'Accent 3',
+    name: 'Aspire secondary',
+    token: '--aspire-color-secondary',
     hex: '#B9AAEE',
-    description: 'Soft edge tone that lightens the outer contour of the mark.',
+    description: 'Soft supporting purple used in borders and secondary surfaces.',
   },
   {
-    name: 'Accent 4',
+    name: 'Aspire muted',
+    token: '--aspire-color-muted',
     hex: '#DCD5F6',
-    description: 'Lightest logo contour tone in the current official mark artwork.',
+    description: 'Light branded lavender used in subtle backgrounds and highlights.',
+  },
+  {
+    name: 'Aspire grey',
+    token: '--aspire-color-grey',
+    hex: '#DCE0E8',
+    description: 'Neutral light grey from the official Aspire site theme.',
+  },
+  {
+    name: 'Aspire black',
+    token: '--aspire-color-black',
+    hex: '#1F1E33',
+    description: 'Dark foundation color used as the main site background in the Aspire frontend.',
+  },
+  {
+    name: 'Aspire white',
+    token: '--aspire-color-white',
+    hex: '#FFFFFF',
+    description: 'Foreground and surface white used throughout the frontend theme.',
   },
 ];
 
 const guidance = [
   {
-    title: 'Use SVG first',
-    description: 'Prefer the provided vector assets for crisp scaling in docs, decks, websites, and event materials.',
+    title: 'Use the official source files',
+    description: 'Prefer the SVGs copied from aspire.dev rather than recreating or tracing the logo.',
   },
   {
     title: 'Preserve proportions',
-    description: 'Do not stretch, crop, redraw, or reshape the Aspire mark or wordmark.',
+    description: 'Do not stretch, crop, redraw, outline, or otherwise reshape the Aspire mark.',
   },
   {
-    title: 'Match the background to the asset',
-    description: 'Use the white wordmark on dark surfaces and the outlined mark on light or neutral surfaces.',
+    title: 'Keep the fills intact',
+    description: 'Retain the existing multitone fills and use the official palette values when pairing the logo with site or deck styling.',
   },
   {
-    title: 'Keep the purple system intact',
-    description: 'Retain the current logo color relationships unless a new approved variant is introduced.',
+    title: 'Avoid unofficial variants',
+    description: 'Do not introduce alternate wordmarks, composite lockups, or icon treatments that are not part of the published asset set.',
   },
 ];
 ---
@@ -118,7 +132,7 @@ const guidance = [
         <h1>Official logos, colors, and presentation assets for Aspire.</h1>
         <p class="lede">
           A lightweight brand repository with curated SVG downloads, practical usage guidance, and an Astro site
-          built to publish on GitHub Pages.
+          built from the official Aspire frontend asset set.
         </p>
         <div class="actions">
           <a class="button" href="#logos">Browse logos</a>
@@ -128,19 +142,17 @@ const guidance = [
       </div>
 
       <div class="hero__visual" aria-hidden="true">
-        <div class="hero-card hero-card--outline">
-          <img src={`${basePath}logo/aspire-mark-outline.svg`} alt="" />
+        <div class="hero-frame hero-frame--primary">
+          <img src={`${basePath}logo/aspire-logo-256.svg`} alt="" class="hero-frame__image hero-frame__image--primary" />
         </div>
 
-        <div class="hero-card hero-card--wordmark">
-          <img src={`${basePath}logo/text-only/aspire-wordmark-white.svg`} alt="" class="hero-card__image--wordmark" />
+        <div class="hero-frame hero-frame--compact">
+          <img src={`${basePath}logo/aspire-logo-32.svg`} alt="" class="hero-frame__image hero-frame__image--compact" />
         </div>
 
-        <div class="hero-card hero-card--icon">
-          <div class="hero-card__icon">
-            <img src={`${basePath}logo/app-icon/aspire-mark-background.svg`} alt="" class="is-background" />
-            <img src={`${basePath}logo/app-icon/aspire-mark-foreground.svg`} alt="" class="is-foreground" />
-          </div>
+        <div class="hero-note">
+          <span>Source of truth</span>
+          <strong>aspire.dev/src/frontend</strong>
         </div>
       </div>
     </section>
@@ -151,18 +163,17 @@ const guidance = [
           <p class="eyebrow">Approach</p>
           <h2>Keep the repo asset-first and easy to consume.</h2>
           <p>
-            This follows the spirit of <code>dotnet/brand</code>: simple folders for reusable assets, lightweight
-            guidance, and a static site that stays in sync with the repository. The initial scope stays focused on
-            Aspire logos, the current purple logo palette, and presentation materials instead of reproducing every
-            asset type from the .NET brand repo.
+            This repository now mirrors the official Aspire frontend assets instead of introducing alternate logo
+            treatments. The scope stays intentionally small: official SVGs, the current site palette, practical usage
+            guidance, and the current intro deck.
           </p>
         </div>
 
         <div class="note-card">
           <h3>Source of truth</h3>
           <p>
-            The SVGs in this repository were copied from the main Aspire source repository&apos;s extension and Maui
-            assets, then reorganized for public reuse here.
+            Logos come from <code>aspire.dev/src/frontend/src/assets</code> and <code>aspire.dev/src/frontend/public</code>.
+            Theme colors come from <code>aspire.dev/src/frontend/src/styles/site.css</code>.
           </p>
         </div>
       </div>
@@ -183,9 +194,8 @@ const guidance = [
         <p class="eyebrow">Logos</p>
         <h2>Official SVG files for reuse.</h2>
         <p>
-          Download the current Aspire brand assets directly from the repository-backed site. Use the outlined mark
-          for light surfaces, the white wordmark for dark surfaces, and the app icon layers when you need a composed
-          square treatment.
+          Download the current Aspire brand assets directly from the repository-backed site. These files are copied
+          from the official Aspire frontend and published here in a simpler asset library.
         </p>
       </div>
 
@@ -193,20 +203,16 @@ const guidance = [
         {logoAssets.map((logo) => (
           <article class="asset-card">
             <div class={`asset-card__preview ${logo.previewClass}`} aria-hidden="true">
-              {logo.type === 'stacked' ? (
-                <div class="asset-card__stack">
-                  <img src={logo.background} alt="" class="is-background" />
-                  <img src={logo.foreground} alt="" class="is-foreground" />
-                </div>
-              ) : (
-                <img src={logo.asset} alt="" class={logo.assetClass} />
-              )}
+              <img src={logo.asset} alt="" class={logo.assetClass} />
             </div>
 
             <div class="asset-card__body">
               <div class="stack">
                 <h3>{logo.title}</h3>
                 <p>{logo.description}</p>
+                <p class="meta-text">
+                  Source: <code>{logo.sourcePath}</code>
+                </p>
               </div>
 
               <div class="link-row">
@@ -225,10 +231,9 @@ const guidance = [
     <section class="section" id="colors">
       <div class="section__header">
         <p class="eyebrow">Colors</p>
-        <h2>The current Aspire logo palette.</h2>
+        <h2>The current Aspire frontend palette.</h2>
         <p>
-          This initial color scale is derived from the official Aspire mark artwork currently checked into the main
-          Aspire repository.
+          These color references are taken from the official frontend theme in <code>aspire.dev/src/frontend/src/styles/site.css</code>.
         </p>
       </div>
 
@@ -238,6 +243,7 @@ const guidance = [
             <div class="swatch" style={`background:${color.hex}`}></div>
             <h3>{color.name}</h3>
             <p>{color.description}</p>
+            <p class="meta-text">{color.token}</p>
             <span class="color-card__hex">{color.hex}</span>
           </article>
         ))}
