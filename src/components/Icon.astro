@@ -1,6 +1,20 @@
 ---
 interface Props {
-  name: 'github' | 'sun' | 'moon' | 'monitor' | 'copy';
+  name:
+    | 'github'
+    | 'sun'
+    | 'moon'
+    | 'monitor'
+    | 'copy'
+    | 'sparkles'
+    | 'layers'
+    | 'image'
+    | 'palette'
+    | 'code'
+    | 'compass'
+    | 'presentation'
+    | 'shield'
+    | 'book';
   size?: number | string;
   class?: string;
 }
@@ -49,6 +63,63 @@ const { name, size = 18, class: className } = Astro.props;
     <>
       <rect x="9" y="9" width="10" height="10" rx="2" />
       <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" />
+    </>
+  )}
+  {name === 'sparkles' && (
+    <>
+      <path d="m12 3 1.4 3.6L17 8l-3.6 1.4L12 13l-1.4-3.6L7 8l3.6-1.4Z" />
+      <path d="m18 14 .9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9Z" />
+      <path d="m6 14 .8 1.7L8.5 16.5l-1.7.8L6 19l-.8-1.7L3.5 16.5l1.7-.8Z" />
+    </>
+  )}
+  {name === 'layers' && (
+    <>
+      <path d="m12 4 8 4-8 4-8-4 8-4Z" />
+      <path d="m4 12 8 4 8-4" />
+      <path d="m4 16 8 4 8-4" />
+    </>
+  )}
+  {name === 'image' && (
+    <>
+      <rect x="3.25" y="4.25" width="17.5" height="15.5" rx="2" />
+      <circle cx="8.5" cy="9.5" r="1.5" />
+      <path d="m20.75 15-4.5-4.5-5 5-2-2L3.25 19" />
+    </>
+  )}
+  {name === 'palette' && (
+    <>
+      <path d="M12 3.25c-4.83 0-8.75 3.52-8.75 7.86 0 3.32 2.3 6.16 5.55 7.31.55.19 1.12-.22 1.12-.8v-1.11c0-.69.56-1.25 1.25-1.25H14A3.75 3.75 0 0 0 14 7.75h-2" />
+      <circle cx="7.75" cy="11" r="1" />
+      <circle cx="10.5" cy="7.75" r="1" />
+      <circle cx="15.25" cy="8.25" r="1" />
+    </>
+  )}
+  {name === 'code' && (
+    <>
+      <path d="m9 18-6-6 6-6" />
+      <path d="m15 6 6 6-6 6" />
+    </>
+  )}
+  {name === 'compass' && (
+    <>
+      <circle cx="12" cy="12" r="8.75" />
+      <path d="m14.75 9.25-2.1 5.5-5.4 2.1 2.1-5.5 5.4-2.1Z" />
+    </>
+  )}
+  {name === 'presentation' && (
+    <>
+      <rect x="3.25" y="4.25" width="17.5" height="11.5" rx="2" />
+      <path d="M12 15.75v5M8.5 20.75h7" />
+      <path d="m7.5 8.5 3 2.5 5-5" />
+    </>
+  )}
+  {name === 'shield' && (
+    <path d="M12 3.25 5.5 5.75v5.5c0 4.13 2.62 7.86 6.5 9.5 3.88-1.64 6.5-5.37 6.5-9.5v-5.5L12 3.25Z" />
+  )}
+  {name === 'book' && (
+    <>
+      <path d="M4.5 5.5A2.25 2.25 0 0 1 6.75 3.25H19.5v15H6.75A2.25 2.25 0 0 0 4.5 20.5Z" />
+      <path d="M4.5 5.5v15.25" />
     </>
   )}
 </svg>

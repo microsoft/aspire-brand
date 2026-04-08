@@ -55,13 +55,38 @@ const repoUrl = 'https://github.com/microsoft/aspire-brand';
       <slot />
 
       <footer class="site-footer">
-        <p>Official Aspire brand assets, color references, and usage guidance.</p>
-        <div class="site-footer__meta">
+        <div class="site-footer__intro">
+          <p class="eyebrow eyebrow--icon">
+            <Icon name="sparkles" size={14} />
+            <span>Stay on brand</span>
+          </p>
+          <h2 class="site-footer__title">Everything you need for Aspire logos, colors, and naming guidance.</h2>
+          <p class="site-footer__summary">
+            Use this site for official brand assets and styling references, and use aspire.dev for product docs and
+            supporting content.
+          </p>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer">
+          <a class="footer-link" href="#logos">Logos</a>
+          <a class="footer-link" href="#colors">Colors</a>
+          <a class="footer-link" href="#guidance">Guidance</a>
+          <a class="footer-link" href="#slides">Slides</a>
+          <a class="footer-link" href="https://aspire.dev" rel="noreferrer" target="_blank">
+            <Icon name="book" size={16} />
+            <span>aspire.dev</span>
+          </a>
           <a class="footer-link" href={repoUrl} rel="noreferrer" target="_blank">
             <Icon name="github" size={16} />
-            <span>microsoft/aspire-brand</span>
+            <span>GitHub</span>
           </a>
+        </nav>
+
+        <div class="site-footer__meta">
           <p>Artwork is CC0 1.0. Trademark rights in the Aspire name and logo remain with Microsoft.</p>
+          <a class="footer-link footer-link--top" href={basePath}>
+            <span>Back to top</span>
+          </a>
         </div>
       </footer>
     </div>
