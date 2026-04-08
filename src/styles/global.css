@@ -767,9 +767,22 @@ p {
 .code-card {
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 
 .code-card .expressive-code {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.15rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.code-card .expressive-code .frame {
+  width: max-content;
+  min-width: 100%;
   margin: 0;
 }
 
@@ -1217,6 +1230,10 @@ p {
   .site-footer__meta {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .code-card__header .copy-button {
+    width: 100%;
   }
 
   .site-footer__copyright {
