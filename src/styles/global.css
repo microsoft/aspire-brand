@@ -280,10 +280,14 @@ p {
 }
 
 .button--ghost {
-  color: var(--brand-purple);
-  background: transparent;
-  border: 1px solid rgba(81, 43, 212, 0.22);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
   box-shadow: none;
+}
+
+.button--ghost:visited {
+  color: var(--text);
 }
 
 .hero__visual {
