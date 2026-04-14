@@ -1,18 +1,18 @@
 ---
-import Icon from './Icon.astro';
+import Icon from "./Icon.astro";
 
 interface Props {
   anchorId: string;
   eyebrow: string;
   icon:
-    | 'sparkles'
-    | 'layers'
-    | 'image'
-    | 'palette'
-    | 'code'
-    | 'compass'
-    | 'presentation'
-    | 'shield';
+    | "sparkles"
+    | "layers"
+    | "image"
+    | "palette"
+    | "code"
+    | "compass"
+    | "presentation"
+    | "shield";
   title: string;
   description?: string;
 }
@@ -20,7 +20,7 @@ interface Props {
 const { anchorId, eyebrow, icon, title, description } = Astro.props;
 ---
 
-<div class="section__header">
+<div class="section__header" data-reveal>
   <a class="eyebrow eyebrow--icon eyebrow--anchor" href={`#${anchorId}`}>
     <Icon name={icon} size={18} />
     <span>{eyebrow}</span>

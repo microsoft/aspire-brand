@@ -1,17 +1,24 @@
 ---
-import Icon from '../components/Icon.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
-import '../styles/global.css';
+import Icon from "../components/Icon.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
 
 const {
-  title = 'Aspire Brand Assets',
-  description = 'Official logos, colors, usage guidance, and presentation assets for Aspire.',
+  title = "Aspire Brand Assets",
+  description = "Official logos, colors, usage guidance, and presentation assets for Aspire.",
 } = Astro.props;
 
 const basePath = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const repoUrl = 'https://github.com/microsoft/aspire-brand';
+const repoUrl = "https://github.com/microsoft/aspire-brand";
 const currentYear = new Date().getFullYear();
+const navLinks = [
+  { href: "#about", label: "What's here" },
+  { href: "#logos", label: "Logos" },
+  { href: "#colors", label: "Colors" },
+  { href: "#guidance", label: "Guidance" },
+  { href: "#slides", label: "Slides" },
+];
 ---
 
 <!doctype html>
@@ -21,18 +28,20 @@ const currentYear = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
       (() => {
-        const storageKey = 'aspire-brand-theme';
-        const preference = localStorage.getItem(storageKey) || 'system';
+        const storageKey = "aspire-brand-theme";
+        const preference = localStorage.getItem(storageKey) || "system";
         const resolvedTheme =
-          preference === 'system'
-            ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          preference === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
             : preference;
 
         document.documentElement.dataset.themePreference = preference;
         document.documentElement.dataset.theme = resolvedTheme;
 
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          document.documentElement.dataset.motion = 'enabled';
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.dataset.motion = "enabled";
         }
       })();
     </script>
@@ -42,24 +51,62 @@ const currentYear = new Date().getFullYear();
   </head>
   <body>
     <div class="shell" id="top">
-      <header class="site-header page">
+      <header class="site-header page" data-site-header>
         <a class="site-brand" href={basePath}>
           <span class="site-brand__title">Aspire Brand</span>
-          <span class="site-brand__subtitle">Official brand guidance and downloads</span>
+          <span class="site-brand__subtitle"
+            >Official brand guidance and downloads</span
+          >
         </a>
 
-        <div class="site-header__actions">
-          <a
-            class="header-link header-link--icon"
-            href={repoUrl}
-            rel="noreferrer"
-            target="_blank"
-            aria-label="Open the Aspire brand GitHub repository"
-            title="Open GitHub repository"
-          >
-            <Icon name="github" size={16} />
-          </a>
-          <ThemeToggle />
+        <button
+          class="menu-toggle"
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+        >
+          <span class="menu-toggle__label">Menu</span>
+          <span class="menu-toggle__icons" aria-hidden="true">
+            <Icon
+              name="menu"
+              size={18}
+              class="menu-toggle__icon menu-toggle__icon--menu"
+            />
+            <Icon
+              name="x"
+              size={18}
+              class="menu-toggle__icon menu-toggle__icon--close"
+            />
+          </span>
+        </button>
+
+        <div class="site-header__panel" id="site-navigation" data-nav-panel>
+          <nav class="site-nav" aria-label="Primary">
+            {
+              navLinks.map((link) => (
+                <a class="site-nav__link" href={link.href}>
+                  <span>{link.label}</span>
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="site-header__actions">
+            <a
+              class="header-link header-link--icon"
+              href={repoUrl}
+              rel="noreferrer"
+              target="_blank"
+              aria-label="Open the Aspire brand GitHub repository"
+              title="Open GitHub repository"
+            >
+              <Icon name="github" size={16} />
+              <span class="header-link__label">GitHub</span>
+            </a>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -72,10 +119,12 @@ const currentYear = new Date().getFullYear();
               <Icon name="sparkles" size={16} />
               <span>Stay on brand</span>
             </p>
-            <h2 class="site-footer__title">Everything you need to use the Aspire brand with clarity.</h2>
+            <h2 class="site-footer__title">
+              Everything you need to use the Aspire brand with clarity.
+            </h2>
             <p class="site-footer__summary">
-              Use this site for logos, colors, and guidance. Use aspire.dev for product docs, product context, and
-              supporting content.
+              Use this site for logos, colors, and guidance. Use aspire.dev for
+              product docs, product context, and supporting content.
             </p>
           </section>
 
@@ -104,11 +153,21 @@ const currentYear = new Date().getFullYear();
           <section class="site-footer__column">
             <h3>Official links</h3>
             <div class="site-footer__list">
-              <a class="footer-nav-link" href="https://aspire.dev" rel="noreferrer" target="_blank">
+              <a
+                class="footer-nav-link"
+                href="https://aspire.dev"
+                rel="noreferrer"
+                target="_blank"
+              >
                 <Icon name="book" size={16} />
                 <span>aspire.dev</span>
               </a>
-              <a class="footer-nav-link" href={repoUrl} rel="noreferrer" target="_blank">
+              <a
+                class="footer-nav-link"
+                href={repoUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
                 <Icon name="github" size={16} />
                 <span>GitHub</span>
               </a>
@@ -121,32 +180,44 @@ const currentYear = new Date().getFullYear();
         </div>
 
         <div class="site-footer__meta">
-          <p class="site-footer__legal">Aspire artwork is available under CC0 1.0. Microsoft retains trademark rights in the Aspire name and logo.</p>
+          <p class="site-footer__legal">
+            Aspire artwork is available under CC0 1.0. Microsoft retains
+            trademark rights in the Aspire name and logo.
+          </p>
           <p class="site-footer__copyright">&copy; {currentYear} Microsoft</p>
         </div>
       </footer>
     </div>
 
-    <a class="back-to-top" href="#top" data-back-to-top aria-label="Back to top">
+    <a
+      class="back-to-top"
+      href="#top"
+      data-back-to-top
+      aria-label="Back to top"
+    >
       <Icon name="arrow-up" size={16} />
       <span>Top</span>
     </a>
 
     <script is:inline>
-      document.addEventListener('click', async (event) => {
-        const button = event.target instanceof Element ? event.target.closest('[data-copy]') : null;
+      document.addEventListener("click", async (event) => {
+        const button =
+          event.target instanceof Element
+            ? event.target.closest("[data-copy]")
+            : null;
         if (!(button instanceof HTMLButtonElement)) {
           return;
         }
 
-        const value = button.getAttribute('data-copy');
+        const value = button.getAttribute("data-copy");
         if (!value) {
           return;
         }
 
-        const label = button.querySelector('.copy-button__label');
-        const originalLabel = button.dataset.copyOriginal || label?.textContent || 'Copy';
-        const successLabel = button.dataset.copySuccess || 'Copied';
+        const label = button.querySelector(".copy-button__label");
+        const originalLabel =
+          button.dataset.copyOriginal || label?.textContent || "Copy";
+        const successLabel = button.dataset.copySuccess || "Copied";
 
         button.dataset.copyOriginal = originalLabel;
 
@@ -163,7 +234,7 @@ const currentYear = new Date().getFullYear();
           }, 1600);
         } catch {
           if (label) {
-            label.textContent = 'Copy failed';
+            label.textContent = "Copy failed";
           }
 
           window.setTimeout(() => {
@@ -175,21 +246,109 @@ const currentYear = new Date().getFullYear();
       });
 
       (() => {
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const backToTop = document.querySelector('[data-back-to-top]');
-        const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
-        const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
+        const siteHeader = document.querySelector("[data-site-header]");
+        const menuToggle = document.querySelector("[data-menu-toggle]");
+        const navPanel = document.querySelector("[data-nav-panel]");
+        const mobileQuery = window.matchMedia("(max-width: 840px)");
+
+        if (
+          !(siteHeader instanceof HTMLElement) ||
+          !(menuToggle instanceof HTMLButtonElement) ||
+          !(navPanel instanceof HTMLElement)
+        ) {
+          return;
+        }
+
+        const setMenuState = (isOpen) => {
+          siteHeader.classList.toggle("is-open", isOpen);
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation" : "Open navigation",
+          );
+          document.documentElement.dataset.navOpen = isOpen ? "true" : "false";
+        };
+
+        setMenuState(false);
+
+        menuToggle.addEventListener("click", () => {
+          if (!mobileQuery.matches) {
+            return;
+          }
+
+          setMenuState(!siteHeader.classList.contains("is-open"));
+        });
+
+        navPanel.addEventListener("click", (event) => {
+          const target = event.target;
+          if (
+            !mobileQuery.matches ||
+            !(target instanceof Element) ||
+            !target.closest("a")
+          ) {
+            return;
+          }
+
+          setMenuState(false);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (
+            !mobileQuery.matches ||
+            !siteHeader.classList.contains("is-open")
+          ) {
+            return;
+          }
+
+          const target = event.target;
+          if (target instanceof Node && siteHeader.contains(target)) {
+            return;
+          }
+
+          setMenuState(false);
+        });
+
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setMenuState(false);
+          }
+        });
+
+        const syncMenuState = () => {
+          if (!mobileQuery.matches) {
+            setMenuState(false);
+          }
+        };
+
+        if (typeof mobileQuery.addEventListener === "function") {
+          mobileQuery.addEventListener("change", syncMenuState);
+        } else if (typeof mobileQuery.addListener === "function") {
+          mobileQuery.addListener(syncMenuState);
+        }
+      })();
+
+      (() => {
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const backToTop = document.querySelector("[data-back-to-top]");
+        const parallaxItems = Array.from(
+          document.querySelectorAll("[data-parallax]"),
+        );
+        const revealItems = Array.from(
+          document.querySelectorAll("[data-reveal]"),
+        );
         let ticking = false;
 
         const updateScrollEffects = () => {
           if (backToTop instanceof HTMLElement) {
-            backToTop.classList.toggle('is-visible', window.scrollY > 320);
+            backToTop.classList.toggle("is-visible", window.scrollY > 320);
           }
 
           if (!reduceMotion) {
             parallaxItems.forEach((item) => {
               if (item instanceof HTMLElement) {
-                const speed = Number(item.dataset.parallaxSpeed || '0.08');
+                const speed = Number(item.dataset.parallaxSpeed || "0.08");
                 const offset = Math.min(window.scrollY * speed, 28);
                 item.style.transform = `translate3d(0, ${offset}px, 0)`;
               }
@@ -202,7 +361,7 @@ const currentYear = new Date().getFullYear();
         updateScrollEffects();
 
         window.addEventListener(
-          'scroll',
+          "scroll",
           () => {
             if (ticking) {
               return;
@@ -214,10 +373,10 @@ const currentYear = new Date().getFullYear();
           { passive: true },
         );
 
-        if (reduceMotion || !('IntersectionObserver' in window)) {
+        if (reduceMotion || !("IntersectionObserver" in window)) {
           revealItems.forEach((item) => {
             if (item instanceof HTMLElement) {
-              item.classList.add('is-visible');
+              item.classList.add("is-visible");
             }
           });
           return;
@@ -226,17 +385,20 @@ const currentYear = new Date().getFullYear();
         const revealObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              if (!(entry.target instanceof HTMLElement) || !entry.isIntersecting) {
+              if (
+                !(entry.target instanceof HTMLElement) ||
+                !entry.isIntersecting
+              ) {
                 return;
               }
 
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add("is-visible");
               revealObserver.unobserve(entry.target);
             });
           },
           {
             threshold: 0.16,
-            rootMargin: '0px 0px -10% 0px',
+            rootMargin: "0px 0px -10% 0px",
           },
         );
 
