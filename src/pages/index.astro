@@ -27,34 +27,49 @@ const cssVarBlock = `:root {
   --aspire-gradient-purple-cyan: linear-gradient(90deg, #7455dd 0%, #0b7e84 100%);
 }`;
 const heroSignals = [
-  { label: "Brand marks", value: "2 SVG downloads" },
-  { label: "Core palette", value: "7 foundation colors" },
-  { label: "Presentation starter", value: "Spring 2026 deck" },
+  {
+    label: "Brand marks",
+    value: "2 SVG downloads",
+    icon: "image" as const,
+    accent: "var(--brand-purple)",
+  },
+  {
+    label: "Core palette",
+    value: "7 foundation colors",
+    icon: "palette" as const,
+    accent: "var(--accent-blue)",
+  },
+  {
+    label: "Presentation starter",
+    value: "Spring 2026 deck",
+    icon: "presentation" as const,
+    accent: "var(--accent-cyan)",
+  },
 ];
 
 const featureHighlights = [
   {
     icon: "image" as const,
     title: "Official marks",
-    description: "SVG logo downloads for focal placements and tight UI moments.",
+    description: "SVG logos for UI, docs, and slides.",
     href: "#logos",
-    label: "Open logos",
+    label: "Logos",
     accent: "var(--brand-purple)",
   },
   {
     icon: "palette" as const,
-    title: "Core and supporting color",
-    description: "The core purple palette, plus accents and gradients for standout moments.",
+    title: "Color system",
+    description: "Core palette, accents, and gradients.",
     href: "#colors",
-    label: "Open colors",
+    label: "Colors",
     accent: "var(--accent-magenta)",
   },
   {
     icon: "presentation" as const,
-    title: "Presentation starter",
-    description: "A current deck for talks, demos, workshops, and community sessions.",
+    title: "Starter deck",
+    description: "Official intro deck for talks and demos.",
     href: "#slides",
-    label: "Open slides",
+    label: "Slides",
     accent: "var(--accent-blue)",
   },
 ];
@@ -241,9 +256,14 @@ const guidanceDonts = [
               <li
                 class="hero-signals__item"
                 data-reveal
-                style={`--reveal-delay: ${280 + index * 80}ms`}
+                style={`--hero-signal-accent:${item.accent};--reveal-delay: ${280 + index * 80}ms`}
               >
-                <span class="hero-signals__label">{item.label}</span>
+                <div class="hero-signals__meta">
+                  <span class="hero-signals__badge" aria-hidden="true">
+                    <Icon name={item.icon} size={18} />
+                  </span>
+                  <span class="hero-signals__label">{item.label}</span>
+                </div>
                 <strong class="hero-signals__value">{item.value}</strong>
               </li>
             ))
@@ -320,33 +340,35 @@ const guidanceDonts = [
           </div>
         </div>
 
-        <div class="about-route-list" role="list">
+        <ul class="about-route-list">
           {
             featureHighlights.map((item, index) => (
-              <a
-                class="about-route"
-                href={item.href}
-                data-reveal
-                style={`--route-accent:${item.accent};--reveal-delay: ${120 + index * 90}ms`}
-              >
-                <span class="about-route__step" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span class="about-route__icon" aria-hidden="true">
-                  <Icon name={item.icon} size={24} />
-                </span>
-                <div class="about-route__content">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <span class="about-route__link">{item.label}</span>
-                </div>
-                <span class="about-route__action" aria-hidden="true">
-                  <Icon name="arrow-down" size={16} />
-                </span>
-              </a>
+              <li>
+                <a
+                  class="about-route"
+                  href={item.href}
+                  data-reveal
+                  style={`--route-accent:${item.accent};--reveal-delay: ${120 + index * 90}ms`}
+                >
+                  <span class="about-route__step" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span class="about-route__icon" aria-hidden="true">
+                    <Icon name={item.icon} size={48} />
+                  </span>
+                  <div class="about-route__content">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <span class="about-route__link">{item.label}</span>
+                  </div>
+                  <span class="about-route__action" aria-hidden="true">
+                    <Icon name="arrow-down" size={16} />
+                  </span>
+                </a>
+              </li>
             ))
           }
-        </div>
+        </ul>
       </div>
     </section>
 
