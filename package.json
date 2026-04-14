@@ -1,0 +1,20 @@
+{
+  "name": "aspire-brand",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official brand assets, logos, and presentation materials for Aspire.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "license": "CC0-1.0",
+  "dependencies": {
+    "@fontsource/poppins": "^5.2.7",
+    "astro": "^6.1.4",
+    "astro-expressive-code": "^0.41.7",
+    "vite-plugin-static-copy": "^4.0.1"
+  }
+}

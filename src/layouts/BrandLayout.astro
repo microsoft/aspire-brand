@@ -1,0 +1,621 @@
+---
+import Icon from "../components/Icon.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const {
+  title = "Aspire Brand Assets",
+  description = "Official logos, colors, usage guidance, and presentation assets for Aspire.",
+} = Astro.props;
+
+const basePath = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const repoUrl = "https://github.com/microsoft/aspire-brand";
+const aspireRepoUrl = "https://github.com/microsoft/aspire";
+const logoMarkUrl = `${basePath}logo/aspire-logo-32.svg`;
+const legalLinks = [
+  {
+    href: "https://go.microsoft.com/fwlink/?LinkID=206977",
+    label: "Terms of Use",
+  },
+  {
+    href: "https://go.microsoft.com/fwlink/?linkid=2196228",
+    label: "Trademarks",
+  },
+];
+const socialLinks = [
+  {
+    href: "https://discord.com/invite/raNPcaaSj8",
+    label: "Discord",
+    icon: "discord",
+  },
+  {
+    href: "https://x.com/aspiredotdev",
+    label: "X",
+    icon: "x-social",
+  },
+  {
+    href: "https://bsky.app/profile/aspire.dev",
+    label: "Bluesky",
+    icon: "bluesky",
+  },
+  {
+    href: "https://www.youtube.com/@aspiredotdev",
+    label: "YouTube",
+    icon: "youtube",
+  },
+] as const;
+const currentYear = new Date().getFullYear();
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#logos", label: "Logos" },
+  { href: "#colors", label: "Colors" },
+  { href: "#css-vars", label: "Tokens" },
+  { href: "#guidance", label: "Guidance" },
+  { href: "#slides", label: "Slides" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        const storageKey = "aspire-brand-theme";
+        const preference = localStorage.getItem(storageKey) || "system";
+        const resolvedTheme =
+          preference === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
+            : preference;
+
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = resolvedTheme;
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.dataset.motion = "enabled";
+        }
+      })();
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <div class="shell" id="top">
+      <header class="site-header page" data-site-header>
+        <div class="site-header__bar">
+          <a class="site-brand" href={basePath} aria-label="Aspire Brand home">
+            <img class="site-brand__mark" src={logoMarkUrl} alt="" />
+          </a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="site-navigation"
+            aria-label="Open navigation"
+          >
+            <span class="menu-toggle__label">Menu</span>
+            <span class="menu-toggle__icons" aria-hidden="true">
+              <Icon
+                name="menu"
+                size={18}
+                class="menu-toggle__icon menu-toggle__icon--menu"
+              />
+              <Icon
+                name="x"
+                size={18}
+                class="menu-toggle__icon menu-toggle__icon--close"
+              />
+            </span>
+          </button>
+        </div>
+
+        <div class="site-header__panel" id="site-navigation" data-nav-panel>
+          <nav class="site-nav" aria-label="Primary" data-primary-nav>
+            {
+              navLinks.map((link) => (
+                <a class="site-nav__link" href={link.href}>
+                  <span>{link.label}</span>
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="site-header__actions">
+            <a
+              class="header-link header-link--icon"
+              href={repoUrl}
+              rel="noreferrer"
+              target="_blank"
+              aria-label="Open the Aspire brand GitHub repository"
+              title="Open GitHub repository"
+            >
+              <Icon name="github" size={16} />
+              <span class="header-link__label">GitHub</span>
+            </a>
+            <ThemeToggle />
+          </div>
+        </div>
+      </header>
+
+      <slot />
+
+      <footer class="site-footer">
+        <div class="site-footer__grid">
+          <section class="site-footer__column site-footer__column--brand">
+            <p class="eyebrow eyebrow--icon">
+              <img class="eyebrow__mark" src={logoMarkUrl} alt="" />
+              <span>Stay on brand</span>
+            </p>
+            <h2 class="site-footer__title">Aspire brand assets, in one place.</h2>
+            <p class="site-footer__summary">
+              Logos, colors, guidance, and downloads. Product docs live on
+              aspire.dev.
+            </p>
+          </section>
+
+          <section class="site-footer__column site-footer__column--browse">
+            <h3>Browse</h3>
+            <nav class="site-footer__list" aria-label="Brand sections">
+              <a class="footer-nav-link" href="#logos">
+                <Icon name="image" size={16} />
+                <span>Logos</span>
+              </a>
+              <a class="footer-nav-link" href="#colors">
+                <Icon name="palette" size={16} />
+                <span>Colors</span>
+              </a>
+              <a class="footer-nav-link" href="#guidance">
+                <Icon name="compass" size={16} />
+                <span>Guidance</span>
+              </a>
+              <a class="footer-nav-link" href="#slides">
+                <Icon name="presentation" size={16} />
+                <span>Slides</span>
+              </a>
+            </nav>
+          </section>
+
+          <section class="site-footer__column site-footer__column--official">
+            <h3>Official links</h3>
+            <div class="site-footer__list">
+              <a
+                class="footer-nav-link"
+                href="https://aspire.dev"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Icon name="book" size={16} />
+                <span>aspire.dev</span>
+              </a>
+              <a
+                class="footer-nav-link"
+                href={aspireRepoUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Icon name="github" size={16} />
+                <span>GitHub: Aspire</span>
+              </a>
+              <a
+                class="footer-nav-link"
+                href={repoUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Icon name="github" size={16} />
+                <span>GitHub: Aspire Brand</span>
+              </a>
+              <a
+                class="footer-nav-link"
+                href="https://aspire.dev/community/contributor-guide/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Icon name="compass" size={16} />
+                <span>Contributor guide</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="site-footer__column site-footer__column--connect">
+            <h3>Connect</h3>
+            <div class="site-footer__list site-footer__list--social">
+              {
+                socialLinks.map((link) => (
+                  <a
+                    class="footer-nav-link footer-nav-link--social"
+                    href={link.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Icon name={link.icon} size={16} />
+                    <span>{link.label}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+        </div>
+
+        <div class="site-footer__meta">
+          <p class="site-footer__legal">
+            Aspire artwork is available under CC0 1.0. Microsoft retains
+            trademark rights in the Aspire name and logo.
+          </p>
+          <div class="site-footer__legal-bar">
+            <nav class="site-footer__legal-links" aria-label="Microsoft legal">
+              {
+                legalLinks.map((link) => (
+                  <a class="site-footer__legal-link" href={link.href}>
+                    <span>{link.label}</span>
+                  </a>
+                ))
+              }
+            </nav>
+            <p class="site-footer__copyright">&copy; {currentYear} Microsoft</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <a
+      class="back-to-top"
+      href="#top"
+      data-back-to-top
+      aria-label="Back to top"
+    >
+      <Icon name="arrow-up" size={16} />
+      <span>Top</span>
+    </a>
+
+    <script is:inline>
+      document.addEventListener("click", async (event) => {
+        const button =
+          event.target instanceof Element
+            ? event.target.closest("[data-copy]")
+            : null;
+        if (!(button instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        const value = button.getAttribute("data-copy");
+        if (!value) {
+          return;
+        }
+
+        const label = button.querySelector(".copy-button__label");
+        const originalLabel =
+          button.dataset.copyOriginal || label?.textContent || "Copy";
+        const successLabel = button.dataset.copySuccess || "Copied";
+
+        button.dataset.copyOriginal = originalLabel;
+
+        try {
+          await navigator.clipboard.writeText(value);
+          if (label) {
+            label.textContent = successLabel;
+          }
+
+          window.setTimeout(() => {
+            if (label) {
+              label.textContent = originalLabel;
+            }
+          }, 1600);
+        } catch {
+          if (label) {
+            label.textContent = "Copy failed";
+          }
+
+          window.setTimeout(() => {
+            if (label) {
+              label.textContent = originalLabel;
+            }
+          }, 1600);
+        }
+      });
+
+      (() => {
+        const siteHeader = document.querySelector("[data-site-header]");
+        const menuToggle = document.querySelector("[data-menu-toggle]");
+        const navPanel = document.querySelector("[data-nav-panel]");
+        const mobileQuery = window.matchMedia("(max-width: 1040px)");
+
+        if (
+          !(siteHeader instanceof HTMLElement) ||
+          !(menuToggle instanceof HTMLButtonElement) ||
+          !(navPanel instanceof HTMLElement)
+        ) {
+          return;
+        }
+
+        const setMenuState = (isOpen) => {
+          siteHeader.classList.toggle("is-open", isOpen);
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation" : "Open navigation",
+          );
+          document.documentElement.dataset.navOpen = isOpen ? "true" : "false";
+        };
+
+        setMenuState(false);
+
+        menuToggle.addEventListener("click", () => {
+          if (!mobileQuery.matches) {
+            return;
+          }
+
+          setMenuState(!siteHeader.classList.contains("is-open"));
+        });
+
+        navPanel.addEventListener("click", (event) => {
+          const target = event.target;
+          if (
+            !mobileQuery.matches ||
+            !(target instanceof Element) ||
+            !target.closest("a")
+          ) {
+            return;
+          }
+
+          setMenuState(false);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (
+            !mobileQuery.matches ||
+            !siteHeader.classList.contains("is-open")
+          ) {
+            return;
+          }
+
+          const target = event.target;
+          if (target instanceof Node && siteHeader.contains(target)) {
+            return;
+          }
+
+          setMenuState(false);
+        });
+
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setMenuState(false);
+          }
+        });
+
+        const syncMenuState = () => {
+          if (!mobileQuery.matches) {
+            setMenuState(false);
+          }
+        };
+
+        if (typeof mobileQuery.addEventListener === "function") {
+          mobileQuery.addEventListener("change", syncMenuState);
+        } else if (typeof mobileQuery.addListener === "function") {
+          mobileQuery.addListener(syncMenuState);
+        }
+      })();
+
+      (() => {
+        const navLinks = Array.from(
+          document.querySelectorAll('.site-nav__link[href^="#"]'),
+        ).filter((link) => link instanceof HTMLAnchorElement);
+
+        if (!navLinks.length) {
+          return;
+        }
+
+        const focusLinkAtIndex = (index) => {
+          const link = navLinks[index];
+          if (link instanceof HTMLAnchorElement) {
+            link.focus();
+          }
+        };
+
+        navLinks.forEach((link, index) => {
+          if (!(link instanceof HTMLAnchorElement)) {
+            return;
+          }
+
+          link.addEventListener("keydown", (event) => {
+            if (event.altKey || event.ctrlKey || event.metaKey) {
+              return;
+            }
+
+            switch (event.key) {
+              case "ArrowRight":
+              case "ArrowDown": {
+                event.preventDefault();
+                focusLinkAtIndex((index + 1) % navLinks.length);
+                break;
+              }
+              case "ArrowLeft":
+              case "ArrowUp": {
+                event.preventDefault();
+                focusLinkAtIndex((index - 1 + navLinks.length) % navLinks.length);
+                break;
+              }
+              case "Home": {
+                event.preventDefault();
+                focusLinkAtIndex(0);
+                break;
+              }
+              case "End": {
+                event.preventDefault();
+                focusLinkAtIndex(navLinks.length - 1);
+                break;
+              }
+            }
+          });
+        });
+
+        const sections = navLinks
+          .map((link) => {
+            const href = link.getAttribute("href");
+            if (!href) {
+              return null;
+            }
+
+            const section = document.querySelector(href);
+            return section instanceof HTMLElement ? section : null;
+          })
+          .filter((section) => section instanceof HTMLElement);
+
+        if (!sections.length) {
+          return;
+        }
+
+        const setActiveSection = (id) => {
+          navLinks.forEach((link) => {
+            if (!(link instanceof HTMLAnchorElement)) {
+              return;
+            }
+
+            const isActive = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", isActive);
+
+            if (isActive) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const fallbackUpdate = () => {
+          let currentSection = sections[0];
+
+          sections.forEach((section) => {
+            if (section.getBoundingClientRect().top <= window.innerHeight * 0.34) {
+              currentSection = section;
+            }
+          });
+
+          setActiveSection(currentSection.id);
+        };
+
+        setActiveSection(sections[0].id);
+
+        if (!("IntersectionObserver" in window)) {
+          fallbackUpdate();
+          window.addEventListener("scroll", fallbackUpdate, { passive: true });
+          return;
+        }
+
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            const visibleEntries = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((left, right) => right.intersectionRatio - left.intersectionRatio);
+
+            if (!visibleEntries.length) {
+              return;
+            }
+
+            const activeSection = visibleEntries[0].target;
+            if (activeSection instanceof HTMLElement) {
+              setActiveSection(activeSection.id);
+            }
+          },
+          {
+            rootMargin: "-26% 0px -52% 0px",
+            threshold: [0.16, 0.3, 0.5, 0.72],
+          },
+        );
+
+        sections.forEach((section) => {
+          navObserver.observe(section);
+        });
+      })();
+
+      (() => {
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const backToTop = document.querySelector("[data-back-to-top]");
+        const parallaxItems = Array.from(
+          document.querySelectorAll("[data-parallax]"),
+        );
+        const revealItems = Array.from(
+          document.querySelectorAll("[data-reveal]"),
+        );
+        let ticking = false;
+
+        const updateScrollEffects = () => {
+          if (backToTop instanceof HTMLElement) {
+            backToTop.classList.toggle("is-visible", window.scrollY > 320);
+          }
+
+          if (!reduceMotion) {
+            parallaxItems.forEach((item) => {
+              if (item instanceof HTMLElement) {
+                const speed = Number(item.dataset.parallaxSpeed || "0.08");
+                const offset = Math.min(window.scrollY * speed, 28);
+                item.style.transform = `translate3d(0, ${offset}px, 0)`;
+              }
+            });
+          }
+
+          ticking = false;
+        };
+
+        updateScrollEffects();
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (ticking) {
+              return;
+            }
+
+            ticking = true;
+            window.requestAnimationFrame(updateScrollEffects);
+          },
+          { passive: true },
+        );
+
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          revealItems.forEach((item) => {
+            if (item instanceof HTMLElement) {
+              item.classList.add("is-visible");
+            }
+          });
+          return;
+        }
+
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (
+                !(entry.target instanceof HTMLElement) ||
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.16,
+            rootMargin: "0px 0px -10% 0px",
+          },
+        );
+
+        revealItems.forEach((item) => {
+          if (item instanceof HTMLElement) {
+            revealObserver.observe(item);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

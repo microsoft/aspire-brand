@@ -1,0 +1,70 @@
+---
+import Icon from './Icon.astro';
+
+const options = [
+  { value: 'light', label: 'Light', icon: 'sun' as const },
+  { value: 'dark', label: 'Dark', icon: 'moon' as const },
+  { value: 'system', label: 'System', icon: 'monitor' as const },
+];
+---
+
+<div class="theme-toggle" role="group" aria-label="Theme preference">
+  {
+    options.map((option) => (
+      <button
+        type="button"
+        class="theme-toggle__button"
+        data-theme-option={option.value}
+        aria-pressed={option.value === 'system' ? 'true' : 'false'}
+        aria-label={option.label}
+      >
+        <Icon name={option.icon} size={16} />
+        <span>{option.label}</span>
+      </button>
+    ))
+  }
+</div>
+
+<script is:inline>
+  (() => {
+    const storageKey = 'aspire-brand-theme';
+    const root = document.documentElement;
+    const buttons = Array.from(document.querySelectorAll('[data-theme-option]'));
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const getPreference = () => localStorage.getItem(storageKey) || 'system';
+    const resolveTheme = (preference) =>
+      preference === 'system' ? (mediaQuery.matches ? 'dark' : 'light') : preference;
+
+    const applyPreference = (preference) => {
+      root.dataset.themePreference = preference;
+      root.dataset.theme = resolveTheme(preference);
+
+      buttons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.themeOption === preference));
+      });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const preference = button.dataset.themeOption || 'system';
+        localStorage.setItem(storageKey, preference);
+        applyPreference(preference);
+      });
+    });
+
+    applyPreference(getPreference());
+
+    const syncSystemTheme = () => {
+      if (getPreference() === 'system') {
+        applyPreference('system');
+      }
+    };
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', syncSystemTheme);
+    } else if (typeof mediaQuery.addListener === 'function') {
+      mediaQuery.addListener(syncSystemTheme);
+    }
+  })();
+</script>

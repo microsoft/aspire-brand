@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  value: string;
+  label?: string;
+  successLabel?: string;
+  ariaLabel?: string;
+}
+
+const {
+  value,
+  label = 'Copy',
+  successLabel = 'Copied',
+  ariaLabel = label,
+} = Astro.props;
+---
+
+<button
+  type="button"
+  class="copy-button"
+  data-copy={value}
+  data-copy-success={successLabel}
+  aria-label={ariaLabel}
+>
+  <Icon name="copy" size={16} />
+  <span class="copy-button__label">{label}</span>
+</button>

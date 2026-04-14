@@ -1,28 +1,40 @@
 # Aspire Brand Assets
 
 <p align="center">
-  Official brand assets, logos, and presentation materials for <a href="https://aspire.dev">Aspire</a>.
+  Official brand assets, logos, colors, and presentation materials for <a href="https://aspire.dev">Aspire</a>.
 </p>
 
----
+This repository brings together the official Aspire logos, the core color references, and the current presentation deck in one place.
 
 ## What is Aspire?
 
-[Aspire](https://aspire.dev) is an agent-ready, code-first tool to compose, debug, and deploy any distributed app.
+[Aspire](https://aspire.dev) is a multi-language local dev-time orchestration tool chain for building, running, debugging, and deploying distributed applications.
 
-## Repository Contents
+## Repository contents
 
-### 📊 Slides
+| Path | Description |
+| --- | --- |
+| [`logo/`](logo) | Official SVG logo files for reuse in docs, decks, sites, and events. |
+| [`slides/`](slides) | Presentation materials for talks, demos, and community sessions. |
 
-| File | Description |
-|------|-------------|
-| [`Aspire-Spring26-IntroDeck.pptx`](slides/intro/Aspire-Spring26-IntroDeck.pptx) | Spring 2026 introduction slide deck |
+## Working locally
 
-## Usage Guidelines
+```bash
+npm install
+npm run dev
+npm run build
+```
 
-These assets are provided for use in community talks, blog posts, documentation, and other content related to Aspire. Please keep the logo's proportions and colors intact — do not stretch, recolor, or alter the logo mark.
+## Usage guidance
 
-## Learn More
+Use the provided SVG assets whenever possible for crisp scaling. Always refer to the product as **Aspire**, not ".NET Aspire". Keep the logo proportions and fill colors intact, avoid introducing alternate lockups or unofficial variants, and point people to [aspire.dev](https://aspire.dev) for official docs and product content.
 
-- **Website** — [aspire.dev](https://aspire.dev)
-- **GitHub** — [microsoft/aspire](https://github.com/microsoft/aspire)
+## License
+
+Artwork here is released under the [CC0 1.0 Universal license](LICENSE). Trademark rights are not waived; the Aspire name and logo remain subject to Microsoft's trademark rights and brand review requirements.
+
+## Learn more
+
+- **Brand site** — https://microsoft.github.io/aspire-brand/
+- **Website** — https://aspire.dev
+- **GitHub** — https://github.com/microsoft/aspire
