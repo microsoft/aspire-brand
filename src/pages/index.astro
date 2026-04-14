@@ -65,6 +65,14 @@ const featureHighlights = [
     accent: "var(--accent-magenta)",
   },
   {
+    icon: "type" as const,
+    title: "Brand type",
+    description: "Poppins for headings, UI, and support copy.",
+    href: "#fonts",
+    label: "Fonts",
+    accent: "var(--accent-sky)",
+  },
+  {
     icon: "presentation" as const,
     title: "Starter deck",
     description: "Official intro deck for talks and demos.",
@@ -205,6 +213,25 @@ const gradients = [
   },
 ];
 
+const fontWeights = [
+  {
+    label: "Regular",
+    weight: "400",
+  },
+  {
+    label: "Medium",
+    weight: "500",
+  },
+  {
+    label: "Semibold",
+    weight: "600",
+  },
+  {
+    label: "Bold",
+    weight: "700",
+  },
+];
+
 const guidanceDos = [
   "Call the product Aspire in brand, editorial, and marketing copy.",
   "Use aspire.dev when you need official docs, product explanation, or supporting content.",
@@ -224,7 +251,7 @@ const guidanceDonts = [
 
 <BrandLayout
   title="Aspire Brand Assets"
-  description="Official Aspire logos, color references, usage guidance, and presentation materials."
+  description="Official Aspire logos, color references, typography, usage guidance, and presentation materials."
 >
   <main class="page">
     <section class="hero">
@@ -233,7 +260,7 @@ const guidanceDonts = [
           Official brand guidance and downloads.
         </h1>
         <p class="lede" data-reveal style="--reveal-delay: 160ms">
-          Logos, colors, guidance, and presentation assets for Aspire.
+          Logos, colors, fonts, guidance, and presentation assets for Aspire.
         </p>
         <a
           class="section-flow section-flow--hero"
@@ -311,7 +338,7 @@ const guidanceDonts = [
                 </span>
                 <h3>Brand assets</h3>
               </div>
-              <p>Logo downloads, colors, guidance, and the current deck.</p>
+              <p>Logo downloads, colors, fonts, guidance, and the current deck.</p>
               <span class="about-switchboard__link">
                 <span>Browse the kit</span>
                 <Icon name="arrow-down" size={16} />
@@ -530,6 +557,62 @@ const guidanceDonts = [
         </div>
       </div>
 
+    </section>
+
+    <section class="section section--accented section--type" id="fonts">
+      <SectionHeading
+        anchorId="fonts"
+        eyebrow="Type"
+        icon="type"
+        title="Poppins is the brand typeface."
+        description="Use Poppins across headings, interface text, and supporting copy. The site currently ships weights 400, 500, 600, and 700."
+      />
+
+      <div class="type-grid">
+        <article class="type-card type-card--specimen" data-reveal style="--reveal-delay: 80ms">
+          <p class="type-card__eyebrow">Primary typeface</p>
+          <h3 class="type-card__family">Poppins</h3>
+          <p class="type-card__sample">Aspire brand kit</p>
+          <p class="type-card__copy">
+            Use Poppins for headings, interface text, and supporting brand copy.
+          </p>
+        </article>
+
+        <article class="type-card type-card--details" data-reveal style="--reveal-delay: 140ms">
+          <div class="stack">
+            <h3>Loaded weights</h3>
+            <p>
+              The site currently imports Poppins locally through Fontsource.
+            </p>
+          </div>
+
+          <ul class="type-weight-list" role="list">
+            {
+              fontWeights.map((font) => (
+                <li class="type-weight">
+                  <span class="type-weight__sample" style={`font-weight:${font.weight}`}>
+                    Poppins
+                  </span>
+                  <span class="type-weight__name">{font.label}</span>
+                  <code class="type-weight__value">{font.weight}</code>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="link-row">
+            <a
+              class="pill-link"
+              href="https://fonts.google.com/specimen/Poppins"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Icon name="link" size={16} />
+              <span>View Poppins</span>
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="section section--accented section--css" id="css-vars">

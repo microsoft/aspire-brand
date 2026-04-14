@@ -5,14 +5,15 @@ import "../styles/global.css";
 
 const {
   title = "Aspire Brand Assets",
-  description = "Official logos, colors, usage guidance, and presentation assets for Aspire.",
+  description = "Official logos, colors, typography, usage guidance, and presentation assets for Aspire.",
 } = Astro.props;
 
 const basePath = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(`${basePath}og/aspire-brand-kit.png`, Astro.site).toString();
 const ogImageAlt =
-  "Aspire Brand Kit share image with the Aspire logo and official asset categories.";
+  "Aspire Brand Kit share image with the Aspire logo, the brand kit title, and badges for logos, colors, slides, and fonts.";
+const faviconUrl = `${basePath}favicon.svg`;
 const repoUrl = "https://github.com/microsoft/aspire-brand";
 const aspireRepoUrl = "https://github.com/microsoft/aspire";
 const logoMarkUrl = `${basePath}logo/aspire-logo-32.svg`;
@@ -53,6 +54,7 @@ const navLinks = [
   { href: "#about", label: "About" },
   { href: "#logos", label: "Logos" },
   { href: "#colors", label: "Colors" },
+  { href: "#fonts", label: "Fonts" },
   { href: "#css-vars", label: "Tokens" },
   { href: "#guidance", label: "Guidance" },
   { href: "#slides", label: "Slides" },
@@ -101,6 +103,8 @@ const navLinks = [
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
     <meta name="twitter:creator" content="@aspiredotdev" />
+    <link rel="icon" type="image/svg+xml" href={faviconUrl} />
+    <link rel="shortcut icon" href={faviconUrl} />
     <link rel="canonical" href={canonical} />
   </head>
   <body>
@@ -174,7 +178,7 @@ const navLinks = [
             </p>
             <h2 class="site-footer__title">Aspire brand assets, in one place.</h2>
             <p class="site-footer__summary">
-              Logos, colors, guidance, and downloads. Product docs live on
+              Logos, colors, fonts, guidance, and downloads. Product docs live on
               aspire.dev.
             </p>
           </section>
@@ -189,6 +193,10 @@ const navLinks = [
               <a class="footer-nav-link" href="#colors">
                 <Icon name="palette" size={16} />
                 <span>Colors</span>
+              </a>
+              <a class="footer-nav-link" href="#fonts">
+                <Icon name="type" size={16} />
+                <span>Fonts</span>
               </a>
               <a class="footer-nav-link" href="#guidance">
                 <Icon name="compass" size={16} />

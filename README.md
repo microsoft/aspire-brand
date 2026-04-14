@@ -1,14 +1,12 @@
 # Aspire Brand Assets
 
-<p align="center">
-  Official brand assets, logos, colors, usage guidance, and presentation materials for <a href="https://aspire.dev">Aspire</a>.
-</p>
+Official brand assets, logos, colors, typography, usage guidance, and presentation materials for [Aspire](https://aspire.dev).
 
 The purpose of this repository is to provide a reference point for using the Aspire brand consistently across docs, decks, websites, events, and community materials. This repo contains the source for the published Aspire brand site together with the official logo files and presentation materials that the site distributes.
 
 Aspire is a multi-language local dev-time orchestration tool chain for building, running, debugging, and deploying distributed applications.
 
-Read the [Aspire brand site](https://microsoft.github.io/aspire-brand/).
+Read the [Aspire brand site](https://aka.ms/aspire/brand).
 
 ## Logo
 
@@ -20,7 +18,13 @@ See the [logo](logo) folder.
 
 The Aspire brand site publishes the current core palette, supporting accents, gradients, and copyable CSS tokens for implementation work. Use the core purple system as the foundation, and treat the accent colors and gradients as supporting expression rather than the entire visual system.
 
-See the [Colors section](https://microsoft.github.io/aspire-brand/#colors) on the brand site.
+See the [Colors section](https://aka.ms/aspire/brand#colors) on the brand site.
+
+## Type
+
+Aspire uses Poppins as the primary typeface for the brand site and supporting brand materials. The site currently ships Poppins weights 400, 500, 600, and 700 through Fontsource for local use.
+
+See the [Fonts section](https://aka.ms/aspire/brand#fonts) on the brand site.
 
 ## Presentation Deck
 
@@ -32,7 +36,8 @@ See the [slides](slides) folder.
 
 This repository also contains the Astro site that publishes the Aspire brand guidance and downloads to GitHub Pages.
 
-- **Published site** — https://microsoft.github.io/aspire-brand/
+- **Published site** — [https://aka.ms/aspire/brand](https://aka.ms/aspire/brand)
+- **GitHub Pages deploy** — [https://microsoft.github.io/aspire-brand/](https://microsoft.github.io/aspire-brand/)
 - **Site source** — [src](src)
 - **Deployment workflow** — [.github/workflows/pages.yml](.github/workflows/pages.yml)
 
