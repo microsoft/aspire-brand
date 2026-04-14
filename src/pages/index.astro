@@ -61,31 +61,31 @@ const featureHighlights = [
 
 const logoAssets = [
   {
-    title: "Aspire logo (256)",
+    title: "Aspire logo (32)",
     description:
-      "Best for slides, docs, hero placements, and larger brand moments.",
-    previewClass: "asset-card__preview--light",
-    asset: `${basePath}logo/aspire-logo-256.svg`,
-    assetClass: "asset-card__image asset-card__image--large",
+      "Best for tighter UI placements or places where the mark needs to stay compact.",
+    asset: `${basePath}logo/aspire-logo-32.svg`,
+    measureLabel: "32px mark",
+    measureScale: "8px cadence",
     downloads: [
       {
         label: "Download SVG",
-        href: `${basePath}logo/aspire-logo-256.svg`,
+        href: `${basePath}logo/aspire-logo-32.svg`,
         icon: "download" as const,
       },
     ],
   },
   {
-    title: "Aspire logo (32)",
+    title: "Aspire logo (256)",
     description:
-      "Best for tighter UI placements or places where the mark needs to stay compact.",
-    previewClass: "asset-card__preview--dark",
-    asset: `${basePath}logo/aspire-logo-32.svg`,
-    assetClass: "asset-card__image asset-card__image--small",
+      "Best for slides, docs, hero placements, and larger brand moments.",
+    asset: `${basePath}logo/aspire-logo-256.svg`,
+    measureLabel: "256px mark",
+    measureScale: "32px field",
     downloads: [
       {
         label: "Download SVG",
-        href: `${basePath}logo/aspire-logo-32.svg`,
+        href: `${basePath}logo/aspire-logo-256.svg`,
         icon: "download" as const,
       },
     ],
@@ -331,21 +331,43 @@ const guidanceDonts = [
         title="Use the official Aspire marks."
         description="Choose the size that best fits the space, then keep the shape and color relationships intact."
       />
+      <div class="logo-showcase" data-reveal style="--reveal-delay: 60ms">
+        <div class="logo-showcase__frame">
+          {
+            logoAssets.map((logo, index) => (
+              <div
+                class={`logo-showcase__panel ${index === 0 ? "logo-showcase__panel--light" : "logo-showcase__panel--dark"}`}
+                aria-hidden="true"
+              >
+                <span class="asset-card__measure asset-card__measure--label">
+                  {logo.measureLabel}
+                </span>
+                <span class="asset-card__measure asset-card__measure--scale">
+                  {logo.measureScale}
+                </span>
+                <span class="asset-card__preview-axis asset-card__preview-axis--x" />
+                <span class="asset-card__preview-axis asset-card__preview-axis--y" />
+                <div class="logo-showcase__logo-wrap">
+                  <img
+                    src={logo.asset}
+                    alt=""
+                    class={`logo-showcase__image ${index === 0 ? "logo-showcase__image--small" : "logo-showcase__image--large"}`}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
       <div class="asset-grid">
         {
           logoAssets.map((logo, index) => (
             <article
               class="asset-card"
               data-reveal
-              style={`--reveal-delay: ${80 + index * 100}ms`}
+              style={`--reveal-delay: ${120 + index * 100}ms`}
             >
-              <div
-                class={`asset-card__preview ${logo.previewClass}`}
-                aria-hidden="true"
-              >
-                <img src={logo.asset} alt="" class={logo.assetClass} />
-              </div>
-
               <div class="asset-card__body">
                 <div class="stack">
                   <h3>{logo.title}</h3>
@@ -404,34 +426,6 @@ const guidanceDonts = [
       </div>
 
       <div class="color-showcase">
-        <div data-reveal style="--reveal-delay: 120ms">
-          <div class="section-subhead">
-            <h3>Supporting accents</h3>
-            <p>
-              Use these sparingly for diagrams, highlights, editorial moments,
-              or motion accents around the core palette.
-            </p>
-          </div>
-          <ul class="accent-spectrum__list" role="list">
-            {
-              supportingAccents.map((accent, index) => (
-                <li
-                  class="accent-chip"
-                  data-reveal
-                  style={`--reveal-delay: ${160 + index * 60}ms`}
-                >
-                  <span
-                    class="accent-chip__swatch"
-                    style={`background:${accent.hex}`}
-                  />
-                  <span class="accent-chip__name">{accent.name}</span>
-                  <code class="accent-chip__hex">{accent.hex}</code>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
         <div data-reveal style="--reveal-delay: 180ms">
           <div class="section-subhead">
             <h3>Supporting gradients</h3>
@@ -457,6 +451,34 @@ const guidanceDonts = [
                     <h4>{gradient.name}</h4>
                     <p>{gradient.guidance}</p>
                   </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div data-reveal style="--reveal-delay: 120ms">
+          <div class="section-subhead">
+            <h3>Supporting accents</h3>
+            <p>
+              Use these sparingly for diagrams, highlights, editorial moments,
+              or motion accents around the core palette.
+            </p>
+          </div>
+          <ul class="accent-spectrum__list" role="list">
+            {
+              supportingAccents.map((accent, index) => (
+                <li
+                  class="accent-chip"
+                  data-reveal
+                  style={`--reveal-delay: ${160 + index * 60}ms`}
+                >
+                  <span
+                    class="accent-chip__swatch"
+                    style={`background:${accent.hex}`}
+                  />
+                  <span class="accent-chip__name">{accent.name}</span>
+                  <code class="accent-chip__hex">{accent.hex}</code>
                 </li>
               ))
             }
@@ -574,7 +596,7 @@ const guidanceDonts = [
         </div>
         <div class="link-row">
           <a class="pill-link" href={deckPath} download>
-            <Icon name="download" size={16} />
+            <Icon name="powerpoint" size={16} />
             <span>Download deck</span>
           </a>
         </div>

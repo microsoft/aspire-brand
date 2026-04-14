@@ -52,35 +52,37 @@ const navLinks = [
   <body>
     <div class="shell" id="top">
       <header class="site-header page" data-site-header>
-        <a class="site-brand" href={basePath}>
-          <span class="site-brand__title">Aspire Brand</span>
-          <span class="site-brand__subtitle"
-            >Official brand guidance and downloads</span
-          >
-        </a>
+        <div class="site-header__bar">
+          <a class="site-brand" href={basePath}>
+            <span class="site-brand__title">Aspire Brand</span>
+            <span class="site-brand__subtitle"
+              >Official brand guidance and downloads</span
+            >
+          </a>
 
-        <button
-          class="menu-toggle"
-          type="button"
-          data-menu-toggle
-          aria-expanded="false"
-          aria-controls="site-navigation"
-          aria-label="Open navigation"
-        >
-          <span class="menu-toggle__label">Menu</span>
-          <span class="menu-toggle__icons" aria-hidden="true">
-            <Icon
-              name="menu"
-              size={18}
-              class="menu-toggle__icon menu-toggle__icon--menu"
-            />
-            <Icon
-              name="x"
-              size={18}
-              class="menu-toggle__icon menu-toggle__icon--close"
-            />
-          </span>
-        </button>
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="site-navigation"
+            aria-label="Open navigation"
+          >
+            <span class="menu-toggle__label">Menu</span>
+            <span class="menu-toggle__icons" aria-hidden="true">
+              <Icon
+                name="menu"
+                size={18}
+                class="menu-toggle__icon menu-toggle__icon--menu"
+              />
+              <Icon
+                name="x"
+                size={18}
+                class="menu-toggle__icon menu-toggle__icon--close"
+              />
+            </span>
+          </button>
+        </div>
 
         <div class="site-header__panel" id="site-navigation" data-nav-panel>
           <nav class="site-nav" aria-label="Primary">
@@ -249,7 +251,7 @@ const navLinks = [
         const siteHeader = document.querySelector("[data-site-header]");
         const menuToggle = document.querySelector("[data-menu-toggle]");
         const navPanel = document.querySelector("[data-nav-panel]");
-        const mobileQuery = window.matchMedia("(max-width: 840px)");
+        const mobileQuery = window.matchMedia("(max-width: 1040px)");
 
         if (
           !(siteHeader instanceof HTMLElement) ||

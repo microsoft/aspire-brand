@@ -15,6 +15,7 @@ interface Props {
     | "code"
     | "compass"
     | "presentation"
+    | "powerpoint"
     | "shield"
     | "book"
     | "arrow-up"
@@ -156,6 +157,15 @@ const { name, size = 18, class: className } = Astro.props;
         <rect x="3.25" y="4.25" width="17.5" height="11.5" rx="2" />
         <path d="M12 15.75v5M8.5 20.75h7" />
         <path d="m7.5 8.5 3 2.5 5-5" />
+      </>
+    )
+  }
+  {
+    name === "powerpoint" && (
+      <>
+        <rect x="3.25" y="4.25" width="17.5" height="15.5" rx="2" />
+        <path d="M8.75 4.25v15.5" />
+        <path d="M12 16.5v-9h3.1a2.2 2.2 0 0 1 0 4.4H12" />
       </>
     )
   }
