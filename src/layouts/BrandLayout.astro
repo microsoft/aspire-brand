@@ -11,11 +11,45 @@ const {
 const basePath = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const repoUrl = "https://github.com/microsoft/aspire-brand";
+const logoMarkUrl = `${basePath}logo/aspire-logo-32.svg`;
+const legalLinks = [
+  {
+    href: "https://go.microsoft.com/fwlink/?LinkID=206977",
+    label: "Terms of Use",
+  },
+  {
+    href: "https://go.microsoft.com/fwlink/?linkid=2196228",
+    label: "Trademarks",
+  },
+];
+const socialLinks = [
+  {
+    href: "https://discord.com/invite/raNPcaaSj8",
+    label: "Discord",
+    icon: "discord",
+  },
+  {
+    href: "https://x.com/aspiredotdev",
+    label: "X",
+    icon: "x-social",
+  },
+  {
+    href: "https://bsky.app/profile/aspire.dev",
+    label: "Bluesky",
+    icon: "bluesky",
+  },
+  {
+    href: "https://www.youtube.com/@aspiredotdev",
+    label: "YouTube",
+    icon: "youtube",
+  },
+] as const;
 const currentYear = new Date().getFullYear();
 const navLinks = [
-  { href: "#about", label: "What's here" },
+  { href: "#about", label: "About" },
   { href: "#logos", label: "Logos" },
   { href: "#colors", label: "Colors" },
+  { href: "#css-vars", label: "Tokens" },
   { href: "#guidance", label: "Guidance" },
   { href: "#slides", label: "Slides" },
 ];
@@ -53,11 +87,8 @@ const navLinks = [
     <div class="shell" id="top">
       <header class="site-header page" data-site-header>
         <div class="site-header__bar">
-          <a class="site-brand" href={basePath}>
-            <span class="site-brand__title">Aspire Brand</span>
-            <span class="site-brand__subtitle"
-              >Official brand guidance and downloads</span
-            >
+          <a class="site-brand" href={basePath} aria-label="Aspire Brand home">
+            <img class="site-brand__mark" src={logoMarkUrl} alt="" />
           </a>
 
           <button
@@ -85,7 +116,7 @@ const navLinks = [
         </div>
 
         <div class="site-header__panel" id="site-navigation" data-nav-panel>
-          <nav class="site-nav" aria-label="Primary">
+          <nav class="site-nav" aria-label="Primary" data-primary-nav>
             {
               navLinks.map((link) => (
                 <a class="site-nav__link" href={link.href}>
@@ -118,19 +149,17 @@ const navLinks = [
         <div class="site-footer__grid">
           <section class="site-footer__column site-footer__column--brand">
             <p class="eyebrow eyebrow--icon">
-              <Icon name="sparkles" size={16} />
+              <img class="eyebrow__mark" src={logoMarkUrl} alt="" />
               <span>Stay on brand</span>
             </p>
-            <h2 class="site-footer__title">
-              Everything you need to use the Aspire brand with clarity.
-            </h2>
+            <h2 class="site-footer__title">Aspire brand assets, in one place.</h2>
             <p class="site-footer__summary">
-              Use this site for logos, colors, and guidance. Use aspire.dev for
-              product docs, product context, and supporting content.
+              Logos, colors, guidance, and downloads. Product docs live on
+              aspire.dev.
             </p>
           </section>
 
-          <section class="site-footer__column">
+          <section class="site-footer__column site-footer__column--browse">
             <h3>Browse</h3>
             <nav class="site-footer__list" aria-label="Brand sections">
               <a class="footer-nav-link" href="#logos">
@@ -152,7 +181,7 @@ const navLinks = [
             </nav>
           </section>
 
-          <section class="site-footer__column">
+          <section class="site-footer__column site-footer__column--official">
             <h3>Official links</h3>
             <div class="site-footer__list">
               <a
@@ -179,6 +208,25 @@ const navLinks = [
               </a>
             </div>
           </section>
+
+          <section class="site-footer__column site-footer__column--connect">
+            <h3>Connect</h3>
+            <div class="site-footer__list site-footer__list--social">
+              {
+                socialLinks.map((link) => (
+                  <a
+                    class="footer-nav-link footer-nav-link--social"
+                    href={link.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Icon name={link.icon} size={16} />
+                    <span>{link.label}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
         </div>
 
         <div class="site-footer__meta">
@@ -186,7 +234,18 @@ const navLinks = [
             Aspire artwork is available under CC0 1.0. Microsoft retains
             trademark rights in the Aspire name and logo.
           </p>
-          <p class="site-footer__copyright">&copy; {currentYear} Microsoft</p>
+          <div class="site-footer__legal-bar">
+            <nav class="site-footer__legal-links" aria-label="Microsoft legal">
+              {
+                legalLinks.map((link) => (
+                  <a class="site-footer__legal-link" href={link.href}>
+                    <span>{link.label}</span>
+                  </a>
+                ))
+              }
+            </nav>
+            <p class="site-footer__copyright">&copy; {currentYear} Microsoft</p>
+          </div>
         </div>
       </footer>
     </div>
@@ -327,6 +386,138 @@ const navLinks = [
         } else if (typeof mobileQuery.addListener === "function") {
           mobileQuery.addListener(syncMenuState);
         }
+      })();
+
+      (() => {
+        const navLinks = Array.from(
+          document.querySelectorAll('.site-nav__link[href^="#"]'),
+        ).filter((link) => link instanceof HTMLAnchorElement);
+
+        if (!navLinks.length) {
+          return;
+        }
+
+        const focusLinkAtIndex = (index) => {
+          const link = navLinks[index];
+          if (link instanceof HTMLAnchorElement) {
+            link.focus();
+          }
+        };
+
+        navLinks.forEach((link, index) => {
+          if (!(link instanceof HTMLAnchorElement)) {
+            return;
+          }
+
+          link.addEventListener("keydown", (event) => {
+            if (event.altKey || event.ctrlKey || event.metaKey) {
+              return;
+            }
+
+            switch (event.key) {
+              case "ArrowRight":
+              case "ArrowDown": {
+                event.preventDefault();
+                focusLinkAtIndex((index + 1) % navLinks.length);
+                break;
+              }
+              case "ArrowLeft":
+              case "ArrowUp": {
+                event.preventDefault();
+                focusLinkAtIndex((index - 1 + navLinks.length) % navLinks.length);
+                break;
+              }
+              case "Home": {
+                event.preventDefault();
+                focusLinkAtIndex(0);
+                break;
+              }
+              case "End": {
+                event.preventDefault();
+                focusLinkAtIndex(navLinks.length - 1);
+                break;
+              }
+            }
+          });
+        });
+
+        const sections = navLinks
+          .map((link) => {
+            const href = link.getAttribute("href");
+            if (!href) {
+              return null;
+            }
+
+            const section = document.querySelector(href);
+            return section instanceof HTMLElement ? section : null;
+          })
+          .filter((section) => section instanceof HTMLElement);
+
+        if (!sections.length) {
+          return;
+        }
+
+        const setActiveSection = (id) => {
+          navLinks.forEach((link) => {
+            if (!(link instanceof HTMLAnchorElement)) {
+              return;
+            }
+
+            const isActive = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", isActive);
+
+            if (isActive) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const fallbackUpdate = () => {
+          let currentSection = sections[0];
+
+          sections.forEach((section) => {
+            if (section.getBoundingClientRect().top <= window.innerHeight * 0.34) {
+              currentSection = section;
+            }
+          });
+
+          setActiveSection(currentSection.id);
+        };
+
+        setActiveSection(sections[0].id);
+
+        if (!("IntersectionObserver" in window)) {
+          fallbackUpdate();
+          window.addEventListener("scroll", fallbackUpdate, { passive: true });
+          return;
+        }
+
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            const visibleEntries = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((left, right) => right.intersectionRatio - left.intersectionRatio);
+
+            if (!visibleEntries.length) {
+              return;
+            }
+
+            const activeSection = visibleEntries[0].target;
+            if (activeSection instanceof HTMLElement) {
+              setActiveSection(activeSection.id);
+            }
+          },
+          {
+            rootMargin: "-26% 0px -52% 0px",
+            threshold: [0.16, 0.3, 0.5, 0.72],
+          },
+        );
+
+        sections.forEach((section) => {
+          navObserver.observe(section);
+        });
       })();
 
       (() => {

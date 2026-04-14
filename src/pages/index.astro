@@ -26,12 +26,6 @@ const cssVarBlock = `:root {
   --aspire-gradient-flamingo-purple: linear-gradient(90deg, #f65163 0%, #7455dd 100%);
   --aspire-gradient-purple-cyan: linear-gradient(90deg, #7455dd 0%, #0b7e84 100%);
 }`;
-const quickLinks = [
-  { href: "#logos", label: "Logos" },
-  { href: "#colors", label: "Colors" },
-  { href: "#guidance", label: "Guidance" },
-  { href: "#slides", label: "Slides" },
-];
 const heroSignals = [
   { label: "Brand marks", value: "2 SVG downloads" },
   { label: "Core palette", value: "7 foundation colors" },
@@ -42,20 +36,26 @@ const featureHighlights = [
   {
     icon: "image" as const,
     title: "Official marks",
-    description:
-      "SVG logo downloads for both focal placements and tighter interface moments.",
+    description: "SVG logo downloads for focal placements and tight UI moments.",
+    href: "#logos",
+    label: "Open logos",
+    accent: "var(--brand-purple)",
   },
   {
     icon: "palette" as const,
     title: "Core and supporting color",
-    description:
-      "The core purple-led palette, plus expressive accents and gradients for standout moments.",
+    description: "The core purple palette, plus accents and gradients for standout moments.",
+    href: "#colors",
+    label: "Open colors",
+    accent: "var(--accent-magenta)",
   },
   {
     icon: "presentation" as const,
     title: "Presentation starter",
-    description:
-      "A current deck you can adapt for talks, demos, workshops, and community sessions.",
+    description: "A current deck for talks, demos, workshops, and community sessions.",
+    href: "#slides",
+    label: "Open slides",
+    accent: "var(--accent-blue)",
   },
 ];
 
@@ -163,23 +163,27 @@ const supportingAccents = [
 const gradients = [
   {
     name: "Purple to magenta",
+    token: "--aspire-gradient-purple-magenta",
     value: "linear-gradient(90deg, #7455DD 0%, #B30F87 100%)",
     guidance:
       "Use for hero accents, highlights, or editorial-style flourishes.",
   },
   {
     name: "Blue to purple",
+    token: "--aspire-gradient-blue-purple",
     value: "linear-gradient(90deg, #0078D7 0%, #7455DD 100%)",
     guidance:
       "Works well for product-led visuals, diagrams, and directional emphasis.",
   },
   {
     name: "Flamingo to purple",
+    token: "--aspire-gradient-flamingo-purple",
     value: "linear-gradient(90deg, #F65163 0%, #7455DD 100%)",
     guidance: "Bring in warmer energy for campaign moments and bold callouts.",
   },
   {
     name: "Purple to cyan",
+    token: "--aspire-gradient-purple-cyan",
     value: "linear-gradient(90deg, #7455DD 0%, #0B7E84 100%)",
     guidance:
       "Use sparingly when the layout needs a cleaner, more technical accent.",
@@ -210,37 +214,26 @@ const guidanceDonts = [
   <main class="page">
     <section class="hero">
       <div class="hero__copy">
-        <p
-          class="eyebrow eyebrow--icon"
-          data-reveal
-          style="--reveal-delay: 40ms"
-        >
-          <Icon name="sparkles" size={16} />
-          <span>Aspire brand</span>
-        </p>
         <h1 data-reveal style="--reveal-delay: 100ms">
-          Use the Aspire brand clearly and consistently.
+          Official brand guidance and downloads.
         </h1>
         <p class="lede" data-reveal style="--reveal-delay: 160ms">
-          Find the official logos, core color references, naming guidance, and
-          presentation material you need to put Aspire in front of people with
-          confidence.
+          Logos, colors, guidance, and presentation assets for Aspire.
         </p>
-        <nav
-          class="section-nav"
-          aria-label="Jump to section"
+        <a
+          class="section-flow section-flow--hero"
+          href="#about"
           data-reveal
           style="--reveal-delay: 220ms"
         >
-          <span class="section-nav__label">Jump to</span>
-          {
-            quickLinks.map((link) => (
-              <a class="section-nav__link" href={link.href}>
-                <span>{link.label}</span>
-              </a>
-            ))
-          }
-        </nav>
+          <span class="section-flow__text">
+            <span class="section-flow__eyebrow">Start here</span>
+            <span class="section-flow__title">What&apos;s here</span>
+          </span>
+          <span class="section-flow__icon" aria-hidden="true">
+            <Icon name="arrow-down" size={18} />
+          </span>
+        </a>
 
         <ul class="hero-signals" role="list">
           {
@@ -279,47 +272,81 @@ const guidanceDonts = [
     </section>
 
     <section class="section section--accented section--about" id="about">
-      <div class="section--split">
-        <div>
+      <div class="about-overview">
+        <div class="about-overview__intro">
           <SectionHeading
             anchorId="about"
             eyebrow="What's here"
             icon="layers"
             title="A focused brand kit for everyday use."
-            description="Everything here is meant to help you move quickly without losing clarity: the official marks, the core colors, a stronger set of brand rules, and a current presentation deck."
+            description="This page stays focused: brand assets here, deeper product docs on aspire.dev."
           />
 
-          <div class="note-card" data-reveal style="--reveal-delay: 80ms">
-            <h3>Use this page for brand assets.</h3>
-            <p>
-              When you need product docs, deeper explanation, or supporting
-              content, send people to{" "}
-              <a href="https://aspire.dev" rel="noreferrer" target="_blank"
-                >aspire.dev</a
-              >.
-            </p>
+          <div class="about-switchboard" data-reveal style="--reveal-delay: 80ms">
+            <a class="about-switchboard__card about-switchboard__card--primary" href="#logos">
+              <span class="about-switchboard__eyebrow">Use this page for</span>
+              <div class="about-switchboard__title-row">
+                <span class="about-switchboard__icon" aria-hidden="true">
+                  <Icon name="layers" size={20} />
+                </span>
+                <h3>Brand assets</h3>
+              </div>
+              <p>Logo downloads, colors, guidance, and the current deck.</p>
+              <span class="about-switchboard__link">
+                <span>Browse the kit</span>
+                <Icon name="arrow-down" size={16} />
+              </span>
+            </a>
+
+            <a
+              class="about-switchboard__card about-switchboard__card--secondary"
+              href="https://aspire.dev"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span class="about-switchboard__eyebrow">Go to aspire.dev for</span>
+              <div class="about-switchboard__title-row">
+                <span class="about-switchboard__icon" aria-hidden="true">
+                  <Icon name="book" size={20} />
+                </span>
+                <h3>Docs and product context</h3>
+              </div>
+              <p>Deeper explanation, product docs, and supporting content.</p>
+              <span class="about-switchboard__link">
+                <span>Open aspire.dev</span>
+                <Icon name="link" size={16} />
+              </span>
+            </a>
           </div>
         </div>
 
-        <ul class="feature-list" role="list">
+        <div class="about-route-list" role="list">
           {
             featureHighlights.map((item, index) => (
-              <li
-                class="feature-list__item"
+              <a
+                class="about-route"
+                href={item.href}
                 data-reveal
-                style={`--reveal-delay: ${120 + index * 90}ms`}
+                style={`--route-accent:${item.accent};--reveal-delay: ${120 + index * 90}ms`}
               >
-                <span class="feature-list__icon" aria-hidden="true">
+                <span class="about-route__step" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span class="about-route__icon" aria-hidden="true">
                   <Icon name={item.icon} size={24} />
                 </span>
-                <div class="feature-list__content">
+                <div class="about-route__content">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
+                  <span class="about-route__link">{item.label}</span>
                 </div>
-              </li>
+                <span class="about-route__action" aria-hidden="true">
+                  <Icon name="arrow-down" size={16} />
+                </span>
+              </a>
             ))
           }
-        </ul>
+        </div>
       </div>
     </section>
 
@@ -331,12 +358,16 @@ const guidanceDonts = [
         title="Use the official Aspire marks."
         description="Choose the size that best fits the space, then keep the shape and color relationships intact."
       />
-      <div class="logo-showcase" data-reveal style="--reveal-delay: 60ms">
-        <div class="logo-showcase__frame">
-          {
-            logoAssets.map((logo, index) => (
+      <div class="asset-grid">
+        {
+          logoAssets.map((logo, index) => (
+            <article
+              class="asset-card asset-card--logo"
+              data-reveal
+              style={`--reveal-delay: ${60 + index * 100}ms`}
+            >
               <div
-                class={`logo-showcase__panel ${index === 0 ? "logo-showcase__panel--light" : "logo-showcase__panel--dark"}`}
+                class={`asset-card__preview asset-card__preview--grid ${index === 0 ? "asset-card__preview--grid-light" : "asset-card__preview--grid-dark"}`}
                 aria-hidden="true"
               >
                 <span class="asset-card__measure asset-card__measure--label">
@@ -347,27 +378,13 @@ const guidanceDonts = [
                 </span>
                 <span class="asset-card__preview-axis asset-card__preview-axis--x" />
                 <span class="asset-card__preview-axis asset-card__preview-axis--y" />
-                <div class="logo-showcase__logo-wrap">
-                  <img
-                    src={logo.asset}
-                    alt=""
-                    class={`logo-showcase__image ${index === 0 ? "logo-showcase__image--small" : "logo-showcase__image--large"}`}
-                  />
-                </div>
+                <img
+                  src={logo.asset}
+                  alt=""
+                  class={`asset-card__image ${index === 0 ? "asset-card__image--small" : "asset-card__image--large"}`}
+                />
               </div>
-            ))
-          }
-        </div>
-      </div>
 
-      <div class="asset-grid">
-        {
-          logoAssets.map((logo, index) => (
-            <article
-              class="asset-card"
-              data-reveal
-              style={`--reveal-delay: ${120 + index * 100}ms`}
-            >
               <div class="asset-card__body">
                 <div class="stack">
                   <h3>{logo.title}</h3>
@@ -447,10 +464,15 @@ const guidanceDonts = [
                     aria-hidden="true"
                     style={`background:${gradient.value}`}
                   />
-                  <div class="gradient-band__body">
+                  <div class="gradient-band__summary">
                     <h4>{gradient.name}</h4>
                     <p>{gradient.guidance}</p>
                   </div>
+                  <Code
+                    class="gradient-band__code"
+                    code={`${gradient.token}: ${gradient.value};`}
+                    lang="css"
+                  />
                 </li>
               ))
             }
@@ -485,6 +507,7 @@ const guidanceDonts = [
           </ul>
         </div>
       </div>
+
     </section>
 
     <section class="section section--accented section--css" id="css-vars">
@@ -501,11 +524,6 @@ const guidanceDonts = [
             <h3>Aspire CSS variables</h3>
             <p>Use this as a clean starting point for implementation.</p>
           </div>
-          <CopyButton
-            value={cssVarBlock}
-            label="Copy CSS vars"
-            ariaLabel="Copy Aspire CSS variables"
-          />
         </div>
         <Code code={cssVarBlock} lang="css" title="aspire-brand-tokens.css" />
       </article>
@@ -575,6 +593,7 @@ const guidanceDonts = [
           </ul>
         </article>
       </div>
+
     </section>
 
     <section class="section section--accented section--slides" id="slides">
@@ -582,25 +601,28 @@ const guidanceDonts = [
         anchorId="slides"
         eyebrow="Presentation materials"
         icon="presentation"
-        title="Start from the current deck."
-        description="Use the latest deck as a starting point for talks, demos, and community sessions, then tailor it to the audience."
+        title="Start from the official intro deck."
+        description="This deck is level 100 Aspire content with official branding, meant to give you a clean starting point for talks, demos, workshops, and community sessions."
       />
       <article class="download-card" data-reveal style="--reveal-delay: 100ms">
         <div class="download-card__copy">
           <h3>Aspire Spring 2026 intro deck</h3>
           <p>
-            Use the current deck as a starting point for talks, demos, and
-            community sessions about Aspire.
+            A level 100 introduction to Aspire with official branding, ready
+            to adapt as a starting point for talks, demos, workshops, and
+            community sessions.
           </p>
           <p class="download-card__meta">PowerPoint (.pptx)</p>
         </div>
-        <div class="link-row">
-          <a class="pill-link" href={deckPath} download>
-            <Icon name="powerpoint" size={16} />
-            <span>Download deck</span>
-          </a>
-        </div>
+        <a class="download-card__cta" href={deckPath} download>
+          <span class="download-card__cta-icon" aria-hidden="true">
+            <Icon name="powerpoint" size={28} />
+          </span>
+          <span class="download-card__cta-label">Download PowerPoint</span>
+          <span class="download-card__cta-meta">.pptx</span>
+        </a>
       </article>
+
     </section>
 
     <section class="section section--accented section--license" id="license">
@@ -626,6 +648,7 @@ const guidanceDonts = [
           </a>
         </div>
       </article>
+
     </section>
   </main>
 </BrandLayout>
