@@ -9,7 +9,10 @@ const {
 } = Astro.props;
 
 const basePath = import.meta.env.BASE_URL;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL(`${basePath}og/aspire-brand-kit.png`, Astro.site).toString();
+const ogImageAlt =
+  "Aspire Brand Kit share image with the Aspire logo and official asset categories.";
 const repoUrl = "https://github.com/microsoft/aspire-brand";
 const aspireRepoUrl = "https://github.com/microsoft/aspire";
 const logoMarkUrl = `${basePath}logo/aspire-logo-32.svg`;
@@ -82,6 +85,22 @@ const navLinks = [
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aspire Brand Assets" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+    <meta name="twitter:creator" content="@aspiredotdev" />
     <link rel="canonical" href={canonical} />
   </head>
   <body>

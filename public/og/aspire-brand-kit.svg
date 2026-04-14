@@ -1,0 +1,101 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Aspire Brand Kit</title>
+  <desc id="desc">Aspire logo with Brand Kit title and a short description of official logos, colors, guidance, and presentation assets.</desc>
+  <defs>
+    <linearGradient id="bg" x1="88" y1="64" x2="1120" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FAFAFF"/>
+      <stop offset="0.45" stop-color="#F5F1FF"/>
+      <stop offset="1" stop-color="#EEF4FF"/>
+    </linearGradient>
+    <radialGradient id="glowPurple" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(288 148) rotate(33.8) scale(316 245)">
+      <stop stop-color="#7455DD" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#7455DD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1018 126) rotate(141.4) scale(250 188)">
+      <stop stop-color="#0078D7" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0078D7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowFlamingo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(920 528) rotate(-147.3) scale(298 215)">
+      <stop stop-color="#F65163" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#F65163" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="72" y1="70" x2="1118" y2="592" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.76"/>
+    </linearGradient>
+    <linearGradient id="cardGlow" x1="116" y1="128" x2="356" y2="384" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F6F0FF"/>
+    </linearGradient>
+    <linearGradient id="pill" x1="412" y1="458" x2="714" y2="458" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#512BD4"/>
+      <stop offset="1" stop-color="#7455DD"/>
+    </linearGradient>
+    <linearGradient id="miniCardStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#CFC7F7"/>
+      <stop offset="1" stop-color="#B7D6F4"/>
+    </linearGradient>
+    <filter id="blur48" x="-120" y="-120" width="1440" height="870" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="48"/>
+    </filter>
+    <filter id="shadow" x="46" y="40" width="1128" height="566" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feOffset dy="16"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.247059 0 0 0 0 0.192157 0 0 0 0 0.501961 0 0 0 0.12 0"/>
+      <feBlend in="SourceGraphic" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g filter="url(#blur48)">
+    <ellipse cx="288" cy="148" rx="316" ry="245" fill="url(#glowPurple)"/>
+    <ellipse cx="1018" cy="126" rx="250" ry="188" fill="url(#glowBlue)"/>
+    <ellipse cx="920" cy="528" rx="298" ry="215" fill="url(#glowFlamingo)"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="34" width="1128" height="562" rx="38" fill="url(#panel)"/>
+    <rect x="36.75" y="34.75" width="1126.5" height="560.5" rx="37.25" stroke="#FFFFFF" stroke-opacity="0.72" stroke-width="1.5"/>
+  </g>
+
+  <rect x="76" y="86" width="292" height="314" rx="54" fill="url(#cardGlow)"/>
+  <rect x="76.75" y="86.75" width="290.5" height="312.5" rx="53.25" stroke="#D9D2F6" stroke-width="1.5"/>
+  <rect x="104" y="114" width="236" height="236" rx="48" fill="#FFFFFF"/>
+  <rect x="104.75" y="114.75" width="234.5" height="234.5" rx="47.25" stroke="#E4DDFB" stroke-width="1.5"/>
+
+  <g transform="translate(110 120) scale(7)">
+    <path d="M3.5 30C1.57 30 0 28.43 0 26.5C0 25.871 0.166 25.259 0.48 24.729L8.818 10.287L8.852 10.236L12.968 3.099C13.593 2.019 14.754 1.349 16 1.349C17.246 1.349 18.407 2.019 19.031 3.098L31.531 24.749C31.833 25.258 31.999 25.87 31.999 26.499C31.999 28.429 30.429 29.999 28.499 29.999L3.5 30Z" fill="#512BD4"/>
+    <path d="M25.33 18H16.99L16 16.28L13.13 11.31C13 11.09 12.82 10.9 12.58 10.77C11.87 10.35 10.95 10.6 10.53 11.32L14.7 4.10001C14.96 3.65001 15.44 3.35001 16 3.35001C16.56 3.35001 17.04 3.65001 17.3 4.10001L21.45 11.29L21.46 11.31L21.48 11.34L25.33 18Z" fill="#7455DD"/>
+    <path d="M30 26.5C30 27.33 29.33 28 28.5 28H20.17C21 28 21.67 27.33 21.67 26.5C21.67 26.23 21.59 25.97 21.47 25.75L17.3 18.53L16.99 18H25.33L29.8 25.75C29.93 25.97 30 26.23 30 26.5Z" fill="#9780E5"/>
+    <path d="M21.67 26.5C21.67 27.33 21 28 20.17 28H11.83C12.66 28 13.33 27.33 13.33 26.5C13.33 26.23 13.26 25.97 13.13 25.75C13.13 25.74 13.12 25.73 13.11 25.72L11.79 23.57L8.82004 18.72C8.55004 18.28 8.07004 18 7.54004 18H16.99L17.3 18.53L17.427 18.75L21.47 25.75C21.59 25.97 21.67 26.23 21.67 26.5Z" fill="#B9AAEE"/>
+    <path d="M13.33 26.5C13.33 27.33 12.66 28 11.83 28H3.5C2.67 28 2 27.33 2 26.5C2 26.23 2.07 25.97 2.2 25.75L6.24 18.75C6.51 18.29 7.01 18 7.54 18C8.07 18 8.55 18.28 8.82 18.72L11.79 23.57L13.11 25.72C13.12 25.73 13.13 25.74 13.13 25.75C13.26 25.97 13.33 26.23 13.33 26.5Z" fill="#DCD5F6"/>
+    <path d="M16.99 18H7.53999C7.00999 18 6.50999 18.29 6.23999 18.75L6.66999 18L10.49 11.39L10.53 11.33V11.32C10.95 10.6 11.87 10.35 12.58 10.77C12.82 10.9 13 11.09 13.13 11.31L16 16.28L16.99 18Z" fill="#9780E5"/>
+  </g>
+
+  <text x="104" y="438" fill="#5D44C8" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="700" letter-spacing="0.26em">OFFICIAL ASSETS</text>
+  <text x="104" y="480" fill="#1F1E33" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="26" font-weight="600">Logos, colors, guidance,</text>
+  <text x="104" y="514" fill="#1F1E33" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="26" font-weight="600">and presentation materials.</text>
+
+  <text x="412" y="174" fill="#5D44C8" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="24" font-weight="700" letter-spacing="0.34em">ASPIRE</text>
+  <text x="412" y="292" fill="#1F1E33" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="92" font-weight="700">Brand Kit</text>
+  <text x="412" y="354" fill="#4D4C66" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="31" font-weight="500">Official logos, palette references, brand guidance,</text>
+  <text x="412" y="397" fill="#4D4C66" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="31" font-weight="500">CSS tokens, and presentation downloads.</text>
+
+  <rect x="412" y="438" width="328" height="56" rx="28" fill="url(#pill)"/>
+  <text x="444" y="473" fill="#FFFFFF" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="24" font-weight="700">microsoft.github.io/aspire-brand</text>
+
+  <rect x="412" y="524" width="196" height="78" rx="26" fill="#FFFFFF"/>
+  <rect x="412.75" y="524.75" width="194.5" height="76.5" rx="25.25" stroke="url(#miniCardStroke)" stroke-width="1.5"/>
+  <text x="438" y="556" fill="#6E61C8" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="17" font-weight="700" letter-spacing="0.18em">LOGOS</text>
+  <text x="438" y="589" fill="#1F1E33" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="29" font-weight="700">SVG downloads</text>
+
+  <rect x="624" y="524" width="196" height="78" rx="26" fill="#FFFFFF"/>
+  <rect x="624.75" y="524.75" width="194.5" height="76.5" rx="25.25" stroke="url(#miniCardStroke)" stroke-width="1.5"/>
+  <text x="650" y="556" fill="#1876B9" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="17" font-weight="700" letter-spacing="0.18em">COLORS</text>
+  <text x="650" y="589" fill="#1F1E33" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="29" font-weight="700">Tokens and gradients</text>
+
+  <rect x="836" y="524" width="280" height="78" rx="26" fill="#FFFFFF"/>
+  <rect x="836.75" y="524.75" width="278.5" height="76.5" rx="25.25" stroke="url(#miniCardStroke)" stroke-width="1.5"/>
+  <text x="862" y="556" fill="#0B7E84" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="17" font-weight="700" letter-spacing="0.18em">SLIDES</text>
+  <text x="862" y="589" fill="#1F1E33" font-family="Poppins, Avenir Next, Segoe UI, sans-serif" font-size="29" font-weight="700">Spring 2026 starter deck</text>
+</svg>
