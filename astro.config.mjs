@@ -13,8 +13,16 @@ export default defineConfig({
       viteStaticCopy({
         targets: [
           { src: 'LICENSE', dest: '.' },
-          { src: 'logo/*.svg', dest: 'logo' },
-          { src: 'slides/intro/*.pptx', dest: 'slides/intro' },
+          {
+            src: 'logo/*.svg',
+            dest: 'logo',
+            rename: { stripBase: true },
+          },
+          {
+            src: 'slides/intro/*.pptx',
+            dest: 'slides/intro',
+            rename: { stripBase: true },
+          },
         ],
       }),
     ],
