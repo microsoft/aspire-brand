@@ -1592,8 +1592,8 @@ p {
 }
 
 .accent-chip__swatch {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 999px;
   border: 1px solid var(--swatch-border);
 }
@@ -2068,26 +2068,23 @@ p {
 
 :root[data-motion='enabled'] [data-reveal] {
   opacity: 0;
-  filter: blur(10px);
-  transform: translate3d(0, 1.5rem, 0) scale(0.985);
+  transform: translate3d(0, 0.4rem, 0);
   transition:
-    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 720ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 360ms ease-out,
+    transform 360ms ease-out;
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, filter, transform;
+  will-change: opacity, transform;
 }
 
 :root[data-motion='enabled'] [data-reveal].is-visible {
   opacity: 1;
-  filter: none;
   transform: none;
 }
 
 .back-to-top {
   position: fixed;
   right: 1.5rem;
-  bottom: 1.5rem;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
   z-index: 10;
   min-height: 2.9rem;
   padding: 0.7rem 1rem;
@@ -2419,7 +2416,22 @@ p {
 
   .back-to-top {
     right: 1rem;
-    bottom: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    gap: 0;
+    padding: 0.7rem;
+    aspect-ratio: 1;
+  }
+
+  .back-to-top__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 }
 

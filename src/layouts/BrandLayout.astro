@@ -10,7 +10,7 @@ const {
 
 const basePath = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const ogImage = new URL(`${basePath}og/aspire-brand-kit.png`, Astro.site).toString();
+const ogImage = new URL(`${basePath}og/aspire-brand-kit.svg`, Astro.site).toString();
 const ogImageAlt =
   "Aspire Brand Kit share image with the Aspire logo, the brand kit title, and badges for logos, colors, slides, and fonts.";
 const faviconUrl = `${basePath}favicon.svg`;
@@ -93,7 +93,7 @@ const navLinks = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/svg+xml" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
@@ -299,7 +299,7 @@ const navLinks = [
       aria-label="Back to top"
     >
       <Icon name="arrow-up" size={16} />
-      <span>Top</span>
+      <span class="back-to-top__label">Top</span>
     </a>
 
     <script is:inline>
@@ -583,8 +583,8 @@ const navLinks = [
           if (!reduceMotion) {
             parallaxItems.forEach((item) => {
               if (item instanceof HTMLElement) {
-                const speed = Number(item.dataset.parallaxSpeed || "0.08");
-                const offset = Math.min(window.scrollY * speed, 28);
+                const speed = Number(item.dataset.parallaxSpeed || "0.04");
+                const offset = Math.min(window.scrollY * speed, 12);
                 item.style.transform = `translate3d(0, ${offset}px, 0)`;
               }
             });

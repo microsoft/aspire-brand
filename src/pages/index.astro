@@ -78,7 +78,7 @@ const featureHighlights = [
     description: "Official intro deck for talks and demos.",
     href: "#slides",
     label: "Slides",
-    accent: "var(--accent-blue)",
+    accent: "var(--accent-cyan)",
   },
 ];
 
@@ -188,6 +188,7 @@ const gradients = [
     name: "Purple to magenta",
     token: "--aspire-gradient-purple-magenta",
     value: "linear-gradient(90deg, #7455DD 0%, #B30F87 100%)",
+    stops: ["#7455DD 0%", "#B30F87 100%"],
     guidance:
       "Use for hero accents, highlights, or editorial-style flourishes.",
   },
@@ -195,6 +196,7 @@ const gradients = [
     name: "Blue to purple",
     token: "--aspire-gradient-blue-purple",
     value: "linear-gradient(90deg, #0078D7 0%, #7455DD 100%)",
+    stops: ["#0078D7 0%", "#7455DD 100%"],
     guidance:
       "Works well for product-led visuals, diagrams, and directional emphasis.",
   },
@@ -202,12 +204,14 @@ const gradients = [
     name: "Flamingo to purple",
     token: "--aspire-gradient-flamingo-purple",
     value: "linear-gradient(90deg, #F65163 0%, #7455DD 100%)",
+    stops: ["#F65163 0%", "#7455DD 100%"],
     guidance: "Bring in warmer energy for campaign moments and bold callouts.",
   },
   {
     name: "Purple to cyan",
     token: "--aspire-gradient-purple-cyan",
     value: "linear-gradient(90deg, #7455DD 0%, #0B7E84 100%)",
+    stops: ["#7455DD 0%", "#0B7E84 100%"],
     guidance:
       "Use sparingly when the layout needs a cleaner, more technical accent.",
   },
@@ -307,7 +311,7 @@ const guidanceDonts = [
         <div
           class="hero-frame hero-frame--primary"
           data-parallax
-          data-parallax-speed="0.08"
+          data-parallax-speed="0.04"
         >
           <img
             src={`${basePath}logo/aspire-logo-256.svg`}
@@ -519,7 +523,7 @@ const guidanceDonts = [
                   </div>
                   <Code
                     class="gradient-band__code"
-                    code={`${gradient.token}: ${gradient.value};`}
+                    code={`${gradient.token}: linear-gradient(\n  90deg,\n  ${gradient.stops.join(",\n  ")}\n);`}
                     lang="css"
                   />
                 </li>
