@@ -29,7 +29,7 @@ const cssVarBlock = `:root {
 const heroSignals = [
   {
     label: "Brand marks",
-    value: "2 SVG downloads",
+    value: "6 SVG downloads",
     icon: "image" as const,
     accent: "var(--brand-purple)",
   },
@@ -83,32 +83,98 @@ const featureHighlights = [
 ];
 
 const logoAssets = [
-  {
-    title: "Aspire logo (32)",
+{
+    title: "Aspire logo (horizontal, dark)",
     description:
-      "Best for tighter UI placements or places where the mark needs to stay compact.",
-    asset: `${basePath}logo/aspire-logo-32.svg`,
-    measureLabel: "32px mark",
-    measureScale: "8px cadence",
+      "Best for slides, docs, hero placements, and larger brand moments.",
+    asset: `${basePath}logo/aspire-logo-dark-horizontal.svg`,
+    measureLabel: "256px dark",
+    measureScale: "32px field",
+    previewLight: true,
     downloads: [
       {
         label: "Download SVG",
-        href: `${basePath}logo/aspire-logo-32.svg`,
+        href: `${basePath}logo/aspire-logo-dark-horizontal.svg`,
         icon: "download" as const,
       },
     ],
   },
   {
-    title: "Aspire logo (256)",
+    title: "Aspire logo (vertical, dark)",
     description:
-      "Best for slides, docs, hero placements, and larger brand moments.",
-    asset: `${basePath}logo/aspire-logo-256.svg`,
-    measureLabel: "256px mark",
+      "Stacked layout for tighter horizontal spaces on dark backgrounds.",
+    asset: `${basePath}logo/aspire-logo-dark-vertical.svg`,
+    measureLabel: "256px dark",
     measureScale: "32px field",
+    previewLight: true,
     downloads: [
       {
         label: "Download SVG",
-        href: `${basePath}logo/aspire-logo-256.svg`,
+        href: `${basePath}logo/aspire-logo-dark-vertical.svg`,
+        icon: "download" as const,
+      },
+    ],
+  },
+  {
+    title: "Aspire logo (horizontal, light)",
+    description:
+      "Use on dark surfaces where the light mark provides the best contrast.",
+    asset: `${basePath}logo/aspire-logo-light-horizontal.svg`,
+    measureLabel: "256px light",
+    measureScale: "32px field",
+    previewLight: false,
+    downloads: [
+      {
+        label: "Download SVG",
+        href: `${basePath}logo/aspire-logo-light-horizontal.svg`,
+        icon: "download" as const,
+      },
+    ],
+  },
+  {
+    title: "Aspire logo (vertical, light)",
+    description:
+      "Stacked layout for tighter horizontal spaces on light backgrounds.",
+    asset: `${basePath}logo/aspire-logo-light-vertical.svg`,
+    measureLabel: "256px light",
+    measureScale: "32px field",
+    previewLight: false,
+    downloads: [
+      {
+        label: "Download SVG",
+        href: `${basePath}logo/aspire-logo-light-vertical.svg`,
+        icon: "download" as const,
+      },
+    ],
+  },
+ {
+    title: "Aspire icon (256)",
+    description:
+      "Only use the icon when it's clear that the context is the Aspire brand.",
+    asset: `${basePath}logo/aspire-icon-256.svg`,
+    measureLabel: "256px mark",
+    measureScale: "32px field",
+    previewLight: true,
+    downloads: [
+      {
+        label: "Download SVG",
+        href: `${basePath}logo/aspire-icon-256.svg`,
+        icon: "download" as const,
+      },
+    ],
+  },
+ {
+    title: "Aspire icon (32)",
+    description:
+      "Only use the icon when it's clear that the context is the Aspire brand.",
+    asset: `${basePath}logo/aspire-icon-32.svg`,
+    measureLabel: "32px mark",
+    measureScale: "8px cadence",
+    previewLight: true,
+    downloads: [
+      {
+        label: "Download SVG",
+        href: `${basePath}logo/aspire-icon-32.svg`,
         icon: "download" as const,
       },
     ],
@@ -314,7 +380,7 @@ const guidanceDonts = [
           data-parallax-speed="0.04"
         >
           <img
-            src={`${basePath}logo/aspire-logo-256.svg`}
+            src={`${basePath}logo/aspire-logo-light-horizontal.svg`}
             alt=""
             class="hero-frame__image hero-frame__image--primary"
           />
@@ -420,7 +486,7 @@ const guidanceDonts = [
               style={`--reveal-delay: ${60 + index * 100}ms`}
             >
               <div
-                class={`asset-card__preview asset-card__preview--grid ${index === 0 ? "asset-card__preview--grid-light" : "asset-card__preview--grid-dark"}`}
+                class={`asset-card__preview asset-card__preview--grid ${logo.previewLight ? "asset-card__preview--grid-light" : "asset-card__preview--grid-dark"}`}
                 aria-hidden="true"
               >
                 <span class="asset-card__measure asset-card__measure--label">
@@ -434,7 +500,7 @@ const guidanceDonts = [
                 <img
                   src={logo.asset}
                   alt=""
-                  class={`asset-card__image ${index === 0 ? "asset-card__image--small" : "asset-card__image--large"}`}
+                  class={`asset-card__image ${logo.asset.includes('icon') ? "asset-card__image--small" : "asset-card__image--large"}`}
                 />
               </div>
 
