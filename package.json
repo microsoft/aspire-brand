@@ -13,8 +13,8 @@
   "license": "CC0-1.0",
   "dependencies": {
     "@fontsource/poppins": "^5.2.7",
-    "astro": "^6.4.8",
-    "astro-expressive-code": "^0.41.7",
+    "astro": "^7.1.3",
+    "astro-expressive-code": "^0.44.1",
     "vite-plugin-static-copy": "^4.1.0"
   },
   "overrides": {
