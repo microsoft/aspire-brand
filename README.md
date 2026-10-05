@@ -10,9 +10,13 @@ Read the [Aspire brand site](https://aka.ms/aspire/brand).
 
 ## Logo
 
-The Aspire logo is the most direct visual representation of the Aspire brand. Use the provided SVG assets whenever possible for crisp scaling. Keep the logo proportions and fill colors intact, avoid introducing unofficial variants, and refer to the product as **Aspire**, not ".NET Aspire", in reader-facing brand and marketing content.
+The Aspire logo is the most direct visual representation of the Aspire brand. Use the provided SVG assets whenever possible for crisp scaling. Keep the logo proportions and fill colors intact, except for the narrow [developer-icon usage permission](logo/developer-tools#developer-icon-usage-permission). Avoid introducing unofficial variants, and refer to the product as **Aspire**, not ".NET Aspire", in reader-facing brand and marketing content.
 
 See the [logo](logo) folder.
+
+### Developer icons
+
+The [developer-tools](logo/developer-tools) subfolder provides official original, line, and plain derivatives for developer icon libraries (including Simple Icons, Devicon, and Nerd Fonts), documentation and README badges, editors, terminals, and other developer tools. Permission is granted to use, reproduce, and redistribute these variants for those purposes, including proportional resizing, monochrome rendering or recoloring, and SVG optimization or path normalization that preserves the recognizable Aspire shape and proportions. Do not imply Microsoft or Aspire endorsement, sponsorship, or affiliation. This narrow exception does not permit arbitrary redesigns or changes to other brand assets; general guidance remains unchanged elsewhere, and trademark rights are retained.
 
 ## Colors
 
@@ -56,4 +60,4 @@ The brand site includes additional guidance for naming, logo handling, color use
 
 ## License
 
-Artwork in this repo is released under the [CC0 1.0 Universal license](LICENSE). You may use the logo files and presentation materials in community content and event materials, subject to the Aspire brand guidance. Trademark rights are not waived; the Aspire name and logo remain subject to Microsoft's trademark rights and brand review requirements.
+Artwork in this repo, including the developer-icon variants, is released under the unchanged [CC0 1.0 Universal license](LICENSE) ([CC0 reference](https://creativecommons.org/publicdomain/zero/1.0/)). You may use the logo files and presentation materials in community content and event materials, subject to the Aspire brand guidance and the developer-icon usage permission above. CC0 does not waive or license trademark rights (section 4(a)); the Aspire name and logo remain subject to Microsoft's trademark rights and brand review requirements.

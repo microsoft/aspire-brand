@@ -305,7 +305,7 @@ const fontWeights = [
 const guidanceDos = [
   "Call the product Aspire in brand, editorial, and marketing copy.",
   "Use aspire.dev when you need official docs, product explanation, or supporting content.",
-  "Use the supplied SVG files without redrawing, outlining, or reshaping the mark.",
+  "Use the supplied SVG files without redrawing, outlining, or reshaping the mark, except as permitted for the provided developer-icon variants below.",
   "Give the logo breathing room and choose high-contrast surfaces that keep it crisp.",
   "Keep the tone clear, helpful, direct, and approachable.",
   "Let the core purple system lead and use accent colors or gradients as supporting expression.",
@@ -313,7 +313,7 @@ const guidanceDos = [
 
 const guidanceDonts = [
   'Do not call the product ".NET Aspire" in consumer-facing brand or marketing content.',
-  "Do not stretch, rotate, recolor, or crowd the logo with partner marks, badges, or dense UI.",
+  "Do not stretch, rotate, or crowd the logo with partner marks, badges, or dense UI. Recoloring is permitted only under the narrow developer-icon usage permission below.",
   "Do not make gradients or supporting accents carry the whole interface on their own.",
   "Do not rely on internal shorthand when a simple reader-facing explanation would be clearer.",
 ];
@@ -768,6 +768,33 @@ const guidanceDonts = [
           </ul>
         </article>
       </div>
+
+      <article class="license-card" id="developer-icons" data-reveal>
+        <h3>Developer-icon usage permission</h3>
+        <p>
+          The <a href={`${repoUrl}/tree/main/logo/developer-tools`}>provided original, line, and plain developer icons</a>
+          are official derivatives for identifying Aspire in developer icon
+          libraries (including Simple Icons, Devicon, and Nerd Fonts),
+          documentation and README badges, editors, terminals, and other
+          developer tools. Permission is granted to use, reproduce, and
+          redistribute these variants for those purposes.
+        </p>
+        <p>
+          Proportional resizing, monochrome rendering or recoloring, and SVG
+          optimization or path normalization are permitted, provided the
+          recognizable Aspire shape and proportions are preserved. Do not imply
+          Microsoft or Aspire endorsement, sponsorship, or affiliation.
+          This narrow exception does not permit arbitrary redesigns or changes
+          to other brand assets. General guidance continues to apply elsewhere.
+        </p>
+        <p>
+          The artwork remains under the unchanged
+          <a href={`${basePath}LICENSE`}>CC0 1.0 Universal license</a>
+          (<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 reference</a>).
+          CC0 does not waive or license trademark rights (section 4(a));
+          Microsoft&apos;s trademark rights in the Aspire name and logo are retained.
+        </p>
+      </article>
 
     </section>
 
